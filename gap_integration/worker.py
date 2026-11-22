@@ -273,7 +273,7 @@ def run(request):
                 sidecar = json.loads(sidecar_path.read_text(encoding='utf-8'))
                 verify_runtime_profile(sidecar['mapping'], root)
                 result['snapshot'] = enriched_snapshot(client, sidecar['mapping'], snapshot)
-                result['normalized_export'] = normalize_snapshot(result['snapshot'], model, sidecar['case_id'])
+                result['normalized_export'] = normalize_snapshot(result['snapshot'], model, sidecar['case_id'], mapping=sidecar['mapping'])
             return result
         client.cmd("GAP.NEWFILE()")
         ensure_smoke(client)

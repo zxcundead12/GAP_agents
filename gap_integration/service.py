@@ -22,7 +22,8 @@ import struct
 import sys
 import uuid
 
-from .contracts import confirmed, validate_manifest, resolve_source
+from gap_manifest.validation import confirmed, validate_manifest
+from gap_manifest.sources import resolve_source
 
 
 _IDENTIFIER = re.compile(r"^(?:plan|approval)_[0-9a-f]{32}$")
@@ -95,6 +96,10 @@ class GapService:
                     approval_id TEXT PRIMARY KEY, plan_id TEXT NOT NULL,
                     plan_sha256 TEXT NOT NULL, receipt_path TEXT NOT NULL,
                     receipt_sha256 TEXT NOT NULL
+                );
+                CREATE TABLE IF NOT EXISTS execution_claims (
+                    plan_id TEXT PRIMARY KEY, owner_pid INTEGER NOT NULL,
+                    active INTEGER NOT NULL
                 );
             """)
 
@@ -239,6 +244,35 @@ class GapService:
                              "resolved_path": str(source_path), "sha256": digest})
         return bindings
 
+    def _runtime_bindings(self, mapping):
+        """Freeze declared profile evidence without confusing it with real verification.
+
+        A mapping with no runtime profile is still an offline plan; its backend
+        must refuse unsupported mapping before COM. Once a profile is declared,
+        all of its files are hash/path-bound to the reviewed plan.
+        """
+        if 'verification_path' not in mapping and 'template_path' not in mapping:
+            return {}
+        proof_path, proof, proof_digest = self._read(mapping.get('verification_path'))
+        if not isinstance(proof, dict):
+            raise ValueError('Runtime verification must be a JSON object.')
+        bindings = {'verification': {'path': str(proof_path), 'sha256': proof_digest}}
+        for role in ('model', 'journal'):
+            binding = proof.get(role)
+            if not isinstance(binding, dict):
+                raise ValueError('Runtime proof has an invalid artifact binding.')
+            path = self._path(binding.get('path'))
+            digest = _hash(path.read_bytes())
+            if digest != binding.get('sha256'):
+                raise ValueError('Runtime proof artifact content changed.')
+            bindings['verification_' + role] = {'path': str(path), 'sha256': digest}
+        template = self._path(mapping.get('template_path'))
+        digest = _hash(template.read_bytes())
+        if template.suffix.lower() != '.gap' or digest != mapping.get('template_sha256'):
+            raise ValueError('Runtime template content changed.')
+        bindings['template'] = {'path': str(template), 'sha256': digest}
+        return bindings
+
     def _prepare(self, operation, summary, inputs=None, manifest=None, mapping=None):
         plan_id = "plan_" + uuid.uuid4().hex
         target = self._path(self.model_dir / (plan_id + ".gap"))
@@ -289,7 +323,8 @@ class GapService:
                                     details={"code": "MAPPING_NOT_CONFIRMED"}, plan_state="NOT_PREPARED")
             inputs = {"manifest": {"path": str(path), "sha256": digest},
                       "mapping": {"path": str(map_path), "sha256": map_digest},
-                      "sources": self._source_bindings(manifest)}
+                      "sources": self._source_bindings(manifest),
+                      "runtime_dependencies": self._runtime_bindings(mapping)}
             if _hash(path.read_bytes()) != digest or _hash(map_path.read_bytes()) != map_digest:
                 raise ValueError("Input changed while the plan was being prepared.")
             return self._prepare("build", {"case_id": manifest["case_id"],
@@ -333,6 +368,8 @@ class GapService:
             raise ValueError("Manifest or mapping is no longer ready.")
         if self._source_bindings(loaded["manifest"]) != inputs["sources"]:
             raise ValueError("Source path or content has changed.")
+        if self._runtime_bindings(loaded['mapping']) != inputs.get('runtime_dependencies', {}):
+            raise ValueError('Runtime profile evidence path or content has changed.')
 
     def approve_plan(self, plan_id: str, approved_by: str):
         """Local human/CLI method.  It must never be registered as an MCP tool."""
@@ -424,6 +461,7 @@ class GapService:
                     return self._result("NOT_READY", "Reserved target already exists; no model was overwritten.",
                                         plan_id=plan_id, details={"code": "TARGET_EXISTS"})
                 db.execute("UPDATE plans SET state='RUNNING',updated_at=? WHERE plan_id=?", (_now(), plan_id))
+                db.execute("INSERT OR REPLACE INTO execution_claims VALUES (?,?,1)", (plan_id, os.getpid()))
             response = self._invoke(plan["job"])
             uncertain = response["execution_status"] not in ({"SUCCESS"} | _KNOWN_REFUSALS)
             state = "UNKNOWN" if uncertain else "COMPLETED"
@@ -437,11 +475,134 @@ class GapService:
             with self._connection() as db:
                 db.execute("UPDATE plans SET state=?,result_json=?,updated_at=? WHERE plan_id=?",
                            (state, _bytes(response).decode("utf-8"), _now(), plan_id))
+                db.execute("UPDATE execution_claims SET active=0 WHERE plan_id=?", (plan_id,))
             self._journal("plan_finished", response["trace_id"], plan_id=plan_id,
                           plan_state=state, execution_status=response["execution_status"])
             return response
         except (OSError, ValueError, TypeError, KeyError, sqlite3.Error) as exc:
             return self._failure(exc, "EXECUTION_REJECTED")
+
+    @staticmethod
+    def _pid_alive(pid):
+        """Check liveness without sending a signal or terminating a process."""
+        if not isinstance(pid, int) or pid <= 0:
+            raise ValueError("Invalid execution owner PID.")
+        if os.name != "nt":
+            if Path("/proc").is_dir():
+                return Path("/proc", str(pid)).exists()
+            raise OSError("Process liveness could not be established.")
+        import ctypes
+        from ctypes import wintypes
+        kernel = ctypes.WinDLL("kernel32", use_last_error=True)
+        kernel.OpenProcess.argtypes = (wintypes.DWORD, wintypes.BOOL, wintypes.DWORD)
+        kernel.OpenProcess.restype = wintypes.HANDLE
+        kernel.WaitForSingleObject.argtypes = (wintypes.HANDLE, wintypes.DWORD)
+        kernel.WaitForSingleObject.restype = wintypes.DWORD
+        kernel.CloseHandle.argtypes = (wintypes.HANDLE,)
+        handle = kernel.OpenProcess(0x00100000, False, pid)  # SYNCHRONIZE, no mutation rights
+        if not handle:
+            if ctypes.get_last_error() == 87:  # ERROR_INVALID_PARAMETER: PID no longer exists
+                return False
+            raise OSError("Execution owner liveness could not be inspected.")
+        try:
+            result = kernel.WaitForSingleObject(handle, 0)
+            if result not in (0, 258):
+                raise OSError("Execution owner liveness could not be inspected.")
+            return result == 258
+        finally:
+            kernel.CloseHandle(handle)
+
+    @staticmethod
+    def _recovery_activity():
+        """Read process metadata only; never starts COM/GAP or kills a worker.
+
+        Fail closed when a Python command line cannot be inspected. Returned
+        evidence contains PIDs, never arbitrary command lines or their secrets.
+        """
+        processes = []
+        if os.name == "nt":
+            import ctypes
+            from ctypes import wintypes
+
+            class ProcessEntry(ctypes.Structure):
+                _fields_ = [("dwSize", wintypes.DWORD), ("cntUsage", wintypes.DWORD),
+                            ("th32ProcessID", wintypes.DWORD), ("th32DefaultHeapID", ctypes.c_size_t),
+                            ("th32ModuleID", wintypes.DWORD), ("cntThreads", wintypes.DWORD),
+                            ("th32ParentProcessID", wintypes.DWORD), ("pcPriClassBase", wintypes.LONG),
+                            ("dwFlags", wintypes.DWORD), ("szExeFile", wintypes.WCHAR * 260)]
+
+            class UnicodeString(ctypes.Structure):
+                _fields_ = [("Length", wintypes.USHORT), ("MaximumLength", wintypes.USHORT), ("Buffer", ctypes.c_void_p)]
+
+            kernel = ctypes.WinDLL("kernel32", use_last_error=True)
+            kernel.CreateToolhelp32Snapshot.argtypes = (wintypes.DWORD, wintypes.DWORD)
+            kernel.CreateToolhelp32Snapshot.restype = wintypes.HANDLE
+            kernel.Process32FirstW.argtypes = (wintypes.HANDLE, ctypes.POINTER(ProcessEntry))
+            kernel.Process32NextW.argtypes = (wintypes.HANDLE, ctypes.POINTER(ProcessEntry))
+            kernel.OpenProcess.argtypes = (wintypes.DWORD, wintypes.BOOL, wintypes.DWORD)
+            kernel.OpenProcess.restype = wintypes.HANDLE
+            kernel.CloseHandle.argtypes = (wintypes.HANDLE,)
+            query = ctypes.WinDLL("ntdll").NtQueryInformationProcess
+            query.argtypes = (wintypes.HANDLE, wintypes.ULONG, ctypes.c_void_p, wintypes.ULONG, ctypes.POINTER(wintypes.ULONG))
+            query.restype = wintypes.LONG
+            snapshot = kernel.CreateToolhelp32Snapshot(2, 0)
+            if snapshot == ctypes.c_void_p(-1).value:
+                raise OSError("Process inspection failed.")
+            entry = ProcessEntry()
+            entry.dwSize = ctypes.sizeof(entry)
+            try:
+                present = kernel.Process32FirstW(snapshot, ctypes.byref(entry))
+                while present:
+                    name, pid = entry.szExeFile, int(entry.th32ProcessID)
+                    if name.lower() == "gap.exe" or name.lower().startswith("python"):
+                        command = "" if pid == os.getpid() else None
+                        handle = None
+                        if name.lower() != "gap.exe" and pid != os.getpid():
+                            handle = kernel.OpenProcess(0x1000, False, pid)  # QUERY_LIMITED_INFORMATION only
+                        if handle:
+                            try:
+                                size = wintypes.ULONG()
+                                query(handle, 60, None, 0, ctypes.byref(size))  # ProcessCommandLineInformation
+                                if 0 < size.value <= 1_048_576:
+                                    buffer = ctypes.create_string_buffer(size.value)
+                                    if query(handle, 60, buffer, size.value, ctypes.byref(size)) == 0:
+                                        value = UnicodeString.from_buffer(buffer)
+                                        start, end = ctypes.addressof(buffer), ctypes.addressof(buffer) + len(buffer)
+                                        if value.Buffer and start <= value.Buffer <= end and value.Buffer + value.Length <= end:
+                                            command = ctypes.wstring_at(value.Buffer, value.Length // 2)
+                            finally:
+                                kernel.CloseHandle(handle)
+                        processes.append({"ProcessId": pid, "Name": name, "CommandLine": command})
+                    present = kernel.Process32NextW(snapshot, ctypes.byref(entry))
+            finally:
+                kernel.CloseHandle(snapshot)
+        elif Path("/proc").is_dir():
+            for entry in Path("/proc").iterdir():
+                if not entry.name.isdigit():
+                    continue
+                try:
+                    name = (entry / "comm").read_text().strip()
+                    if name.lower() == "gap.exe" or name.lower().startswith("python"):
+                        command = (entry / "cmdline").read_bytes().replace(b"\0", b" ").decode("utf-8", "replace")
+                        processes.append({"ProcessId": int(entry.name), "Name": name, "CommandLine": command})
+                except FileNotFoundError:
+                    continue  # process exited during the read-only inventory
+        else:
+            raise OSError("Process inspection is unsupported on this platform.")
+        if not isinstance(processes, list):
+            raise ValueError("Invalid process inspection result.")
+        evidence = {"verified": True, "gap_pids": [], "worker_pids": [], "uninspectable_python_pids": []}
+        for item in processes:
+            if not isinstance(item, dict) or not isinstance(item.get("ProcessId"), int):
+                raise ValueError("Invalid process inspection entry.")
+            pid, name, command = item["ProcessId"], item.get("Name", ""), item.get("CommandLine")
+            if name.lower() == "gap.exe":
+                evidence["gap_pids"].append(pid)
+            elif pid != os.getpid() and not isinstance(command, str):
+                evidence["uninspectable_python_pids"].append(pid)
+            elif isinstance(command, str) and re.search(r"(?:^|\s)-m\s+gap_integration\.worker(?:\s|$)", command):
+                evidence["worker_pids"].append(pid)
+        return evidence
 
     def acknowledge_unknown(self, plan_id: str, reviewed_by: str, note: str):
         """Locally record an operator's investigation; never retry the old plan.
@@ -450,6 +611,9 @@ class GapService:
         inspect GAP/worker state and document the facts in ``note``.  Acknowledging
         the uncertain execution allows a new, separately approved plan; it does
         not change the observed result or repair a license/API error.
+        Interrupted RUNNING claims additionally require a recorded, inactive
+        owner. A read-only process check must find no GAP or worker activity;
+        this method never stops processes or claims to cancel native work.
         """
         try:
             if not _text(reviewed_by) or not _text(note):
@@ -458,16 +622,31 @@ class GapService:
             with self._connection() as db:
                 db.execute("BEGIN IMMEDIATE")
                 row = db.execute("SELECT * FROM plans WHERE plan_id=?", (plan_id,)).fetchone()
-                if row["state"] != "UNKNOWN" or not row["result_json"]:
-                    return self._result("NOT_READY", "Only a recorded UNKNOWN execution may be acknowledged.",
+                if row["state"] not in ("UNKNOWN", "RUNNING"):
+                    return self._result("NOT_READY", "Only an uncertain execution may be acknowledged.",
                                         plan_id=plan_id, plan_state=row["state"])
-                prior = json.loads(row["result_json"])
+                claim = db.execute("SELECT * FROM execution_claims WHERE plan_id=?", (plan_id,)).fetchone()
+                if row["state"] == "RUNNING" and claim is None:
+                    return self._result("NOT_READY", "Execution ownership was not recorded; automatic reconciliation is unsafe.",
+                                        plan_id=plan_id, details={"code": "OWNERSHIP_NOT_RECORDED"})
+                if claim is not None and claim["active"] and self._pid_alive(claim["owner_pid"]):
+                    return self._result("NOT_READY", "Execution owner is still active; wait for it to finish before reconciliation.",
+                                        plan_id=plan_id, details={"code": "EXECUTION_OWNER_ACTIVE"})
+                activity = self._recovery_activity()
+                if (activity.get("verified") is not True or any(activity.get(key) for key in
+                        ("gap_pids", "worker_pids", "uninspectable_python_pids"))):
+                    return self._result("NOT_READY", "GAP or a worker may still be active; reconciliation was refused.",
+                                        plan_id=plan_id, details={"code": "EXECUTION_ACTIVITY_PRESENT", "activity": activity})
+                prior = json.loads(row["result_json"]) if row["result_json"] else self._result(
+                    "ERROR", "Interrupted execution has no recorded outcome; its success is not established.",
+                    plan_id=plan_id, plan_state="RUNNING", manual_review_required=True)
                 acknowledgement = {
                     "schema_version": "1.0", "acknowledgement_id": "ack_" + uuid.uuid4().hex,
                     "plan_id": plan_id, "plan_sha256": row["plan_sha256"],
                     "reviewed_by": reviewed_by.strip(), "reviewed_at": _now(), "note": note.strip(),
-                    "prior_state": "UNKNOWN", "new_state": "RESOLVED_NO_RETRY",
+                    "prior_state": row["state"], "new_state": "RESOLVED_NO_RETRY",
                     "prior_execution_result": prior,
+                    "process_inspection": activity,
                     "automatic_retry_permitted": False,
                 }
                 path, digest = self._save(
@@ -482,6 +661,7 @@ class GapService:
                 resolved["acknowledgement"].update(path=str(path), sha256=digest)
                 db.execute("UPDATE plans SET state='RESOLVED_NO_RETRY',result_json=?,updated_at=? WHERE plan_id=?",
                            (_bytes(resolved).decode("utf-8"), _now(), plan_id))
+                db.execute("UPDATE execution_claims SET active=0 WHERE plan_id=?", (plan_id,))
             result = self._result("SUCCESS", "Operator investigation recorded; old plan remains terminal and cannot be retried.",
                                   plan_id=plan_id, plan_state="RESOLVED_NO_RETRY", acknowledgement_path=str(path),
                                   prior_execution_status=prior["execution_status"], automatic_retry_permitted=False)

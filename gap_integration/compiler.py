@@ -9,7 +9,7 @@ import hashlib
 import json
 import re
 
-from .contracts import PARAMETERS, confirmed, validate_manifest, finite_number
+from gap_manifest.validation import PARAMETERS, confirmed, finite_number, validate_manifest
 
 PROFILE = 'ipm75-reviewed-pipe-mask-v1'
 KINDS = {'junction': ('JOINT',), 'source': ('SOURCE', 'WELL'), 'boundary': ('SINK', 'SEP')}
@@ -101,10 +101,14 @@ def metadata_text(case_id, metadata):
                       ensure_ascii=False, separators=(',', ':'))
 
 
-def normalize_snapshot(snapshot, model, case_id):
+def normalize_snapshot(snapshot, model, case_id, mapping=None):
     """Only actual snapshot values are inputs. No manifest parameter fallback."""
+    if not isinstance(snapshot, dict) or not isinstance(model, dict):
+        raise MappingError('Снимок и описание модели должны быть объектами JSON')
     if model.get('evidence') not in ('real', 'synthetic'):
         raise MappingError('Нужно указать происхождение снимка')
+    if model['evidence'] == 'real' or mapping is not None:
+        mapping = profile(mapping)
     equipment = snapshot.get('equipment')
     if not isinstance(equipment, list) or snapshot.get('count') != len(equipment):
         raise MappingError('Некорректный снимок оборудования')
@@ -116,7 +120,7 @@ def normalize_snapshot(snapshot, model, case_id):
             meta = json.loads(item['comment'])
         except (KeyError, TypeError, ValueError):
             raise MappingError('У оборудования отсутствуют читаемые метаданные; экспорт не дополнен манифестом') from None
-        if meta.get('gap_agent_schema') != '1.0' or meta.get('case_id') != case_id:
+        if not isinstance(meta, dict) or meta.get('gap_agent_schema') != '1.0' or meta.get('case_id') != case_id:
             raise MappingError('Чужое оборудование или неверный case_id')
         identifier = meta.get('id')
         if not isinstance(identifier, str) or not identifier or identifier in ids:
@@ -125,9 +129,13 @@ def normalize_snapshot(snapshot, model, case_id):
         labels[item['label']] = (item, meta)
     for item, meta in labels.values():
         kind = meta.get('kind')
-        if kind in KINDS:
+        if not isinstance(meta.get('original_label'), str):
+            raise MappingError('Исходная подпись отсутствует в прочитанных метаданных')
+        if isinstance(kind, str) and kind in KINDS:
             if item.get('type') not in KINDS[kind]:
                 raise MappingError('Native тип не соответствует прочитанной семантике')
+            if mapping is not None and item.get('type') != mapping['node_types'][kind]:
+                raise MappingError('Native тип не соответствует конкретному утверждённому mapping')
             nodes.append({'id': meta['id'], 'kind': kind, 'original_label': meta['original_label']})
             continue
         if kind != 'pipe' or item.get('type') != 'PIPE':
@@ -145,16 +153,31 @@ def normalize_snapshot(snapshot, model, case_id):
             own_valves = meta['valves']
             if not isinstance(own_valves, list) or len(own_valves) > 1:
                 raise MappingError('Неподдержанная конфигурация арматуры')
+            if any(not isinstance(valve, dict) for valve in own_valves):
+                raise MappingError('Метаданные клапана должны быть объектом JSON')
             if meta['active_state'] not in ('active', 'inactive') or any(v['physical_state'] not in ('open', 'closed') for v in own_valves):
                 raise MappingError('Неизвестное физическое состояние')
             masked = meta['active_state'] == 'inactive' or any(v['physical_state'] == 'closed' for v in own_valves)
-            if str(item['is_masked']) != str(int(masked)):
+            raw_mask = item['is_masked']
+            if isinstance(raw_mask, bool) or not isinstance(raw_mask, (str, int, float)):
+                raise MappingError('Некорректное прочитанное ISMASKED')
+            try:
+                mask_value = float(raw_mask)
+            except ValueError:
+                raise MappingError('Некорректное прочитанное ISMASKED') from None
+            if not finite_number(mask_value) or mask_value not in (0, 1) or bool(mask_value) != masked:
                 raise MappingError('Native masking не соответствует прочитанному физическому состоянию')
             pipes.append({'id': meta['id'], 'from_node': ends[0]['id'], 'to_node': ends[1]['id'],
                           'parameters': deepcopy(parameters), 'active_state': meta['active_state']})
             for valve in own_valves:
-                if valve['pipe_id'] != meta['id'] or valve['id'] in ids:
+                if (not isinstance(valve.get('id'), str) or not valve['id']
+                        or valve['pipe_id'] != meta['id'] or valve['id'] in ids):
                     raise MappingError('Коллизия или неверная привязка клапана')
+                if (not isinstance(valve.get('original_label'), str)
+                        or (valve.get('size_dn_mm') is not None and
+                            (not finite_number(valve['size_dn_mm']) or valve['size_dn_mm'] <= 0))
+                        or (valve.get('pressure_rating_raw') is not None and not isinstance(valve['pressure_rating_raw'], str))):
+                    raise MappingError('Некорректные прочитанные подпись/DN/рейтинг клапана')
                 ids.add(valve['id'])
                 valves.append(deepcopy(valve))
         except (KeyError, TypeError):

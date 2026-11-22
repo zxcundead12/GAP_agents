@@ -9,8 +9,8 @@ from unittest.mock import patch
 from gap_integration.compiler import MappingError, PROFILE, compile_manifest, metadata_text, normalize_snapshot
 from gap_integration.production import verify_runtime_profile
 from gap_integration.worker import GapError, run
-from gap_integration.contracts import PARAMETERS
-from synthetic_engineering import fixture, validate_synthetic
+from gap_manifest.validation import PARAMETERS
+from test_validation import fixture
 
 
 def mapping():
@@ -39,11 +39,6 @@ def recorded_snapshot():
 
 
 class ProductionTests(unittest.TestCase):
-    def setUp(self):
-        validator = patch('gap_integration.compiler.validate_manifest', side_effect=validate_synthetic)
-        validator.start()
-        self.addCleanup(validator.stop)
-
     def test_compiler_produces_stable_ids_and_never_authorizes_runtime(self):
         first = compile_manifest(fixture(), mapping())
         self.assertEqual(first, compile_manifest(fixture(), mapping()))

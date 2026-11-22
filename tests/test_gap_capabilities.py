@@ -76,9 +76,9 @@ class CapabilityReadinessTests(unittest.TestCase):
         result = build_readiness(self.manifest)
         matrix = {row["id"]: row for row in result["capability_matrix"]}
         self.assertEqual(matrix["create_equipment"]["status"], "documented_unverified")
-        self.assertEqual(matrix["valve_state"]["status"], "unverified")
-        self.assertEqual(matrix["independent_normalized_export"]["status"], "unsupported")
-        self.assertEqual(matrix["production_build"]["status"], "unsupported")
+        self.assertEqual(matrix["valve_state"]["status"], "documented_unverified")
+        self.assertEqual(matrix["independent_normalized_export"]["status"], "unverified")
+        self.assertEqual(matrix["production_build"]["status"], "unverified")
         self.assertTrue(all(row["status"] in ("documented_unverified", "unverified", "unsupported")
                             for row in matrix.values()))
         self.assertTrue(all(row["official_pdf_refs"] for row in matrix.values()))
@@ -91,8 +91,8 @@ class CapabilityReadinessTests(unittest.TestCase):
     def test_required_gaps_cover_valves_connections_pipe_units_and_readback(self):
         result = build_readiness(self.manifest)
         codes = self.codes(result)
-        self.assertTrue({"CAPABILITY_NATIVE_SOURCE_SINK_VALVE_CONNECTIONS", "CAPABILITY_VALVE_STATE",
-                         "CAPABILITY_VALVE_DN_AND_RATING", "CAPABILITY_PIPE_SEGMENT_INDEXING",
+        self.assertTrue({"CAPABILITY_NATIVE_SOURCE_SINK_VALVE_CONNECTIONS", "VALVE_REPRESENTATION_REVIEW_REQUIRED",
+                         "CAPABILITY_PIPE_SEGMENT_INDEXING",
                          "CAPABILITY_INDEPENDENT_NORMALIZED_EXPORT", "VALVE_INSERTION_MAPPING_REQUIRED",
                          "PIPE_OD_WALL_MODEL_MODE_REQUIRED", "DOCUMENTATION_IS_NOT_RUNTIME_VERIFICATION"}.issubset(codes))
         unit_row = next(row for row in result["capability_matrix"] if row["id"] == "pipe_units")
@@ -116,14 +116,17 @@ class CapabilityReadinessTests(unittest.TestCase):
         self.assertIn("CAPABILITY_PRODUCTION_BUILD", self.codes(result))
         self.assertFalse(result["ready_for_production_build"])
 
-    def test_synthetic_candidate_is_reported_without_changing_inputs(self):
-        manifest = synthetic_manifest()
+    def test_actual_candidate_is_reported_without_changing_files_or_confirmations(self):
+        path = Path(__file__).resolve().parents[1] / "data/candidate_manifest.json"
+        before = path.read_bytes()
+        manifest = json.loads(before.decode("utf-8"))
         original = deepcopy(manifest)
         result = build_readiness(manifest)
         self.assertEqual(result["case_id"], manifest["case_id"])
         self.assertEqual(result["counts"]["nodes"], len(manifest["nodes"]))
         self.assertFalse(result["ready_for_production_build"])
         self.assertEqual(manifest, original)
+        self.assertEqual(path.read_bytes(), before)
 
     def test_malformed_documents_and_unhashable_values_return_json_errors(self):
         mutations = [None, [], "bad", {},

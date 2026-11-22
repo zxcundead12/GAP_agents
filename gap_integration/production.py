@@ -3,9 +3,12 @@ from datetime import datetime, timezone
 import hashlib
 import json
 from pathlib import Path
+import re
 import shutil
 
-from .contracts import workspace_path, read_json
+from gap_agent.contracts import workspace_path
+from gap_agent.storage import read_json
+from gap_manifest.validation import confirmed
 from .compiler import MappingError, compile_manifest, metadata_text, normalize_snapshot, profile, suffixes
 
 REQUIRED_FEATURES = {'node_types', 'connections', 'pipe_geometry', 'units', 'valve_masking', 'metadata_readback'}
@@ -14,6 +17,8 @@ REQUIRED_FEATURES = {'node_types', 'connections', 'pipe_geometry', 'units', 'val
 def verify_runtime_profile(mapping, root):
     profile(mapping)
     proof = read_json(workspace_path(root, mapping.get('verification_path')))
+    if not isinstance(proof, dict) or not confirmed(proof):
+        raise MappingError('Протокол проверки требует собственного confirmed review с инженером и временем')
     frozen = {k: v for k, v in mapping.items() if k != 'verification_path'}
     expected_hash = hashlib.sha256(json.dumps(frozen, sort_keys=True, ensure_ascii=False).encode('utf-8')).hexdigest()
     if (proof.get('evidence') != 'real' or proof.get('execution_status') != 'SUCCESS'
@@ -34,6 +39,13 @@ def verify_runtime_profile(mapping, root):
 
 
 def ref(kind, label):
+    # Labels read from a model are data, not trusted fragments of OpenServer tags.
+    # This production profile generates exactly N/P + eight lowercase hex digits.
+    if kind not in ('JOINT', 'SOURCE', 'WELL', 'SINK', 'SEP', 'PIPE') or not isinstance(label, str):
+        raise MappingError('Native тип или label не принадлежит production-профилю')
+    prefix = 'P' if kind == 'PIPE' else 'N'
+    if not re.fullmatch(prefix + r'[0-9a-f]{8}', label):
+        raise MappingError('Native label не соответствует безопасному короткому идентификатору профиля')
     return f'MOD[0].{kind}[{{{label}}}]'
 
 
@@ -120,7 +132,7 @@ def execute_build(client, job, root, target, snapshot_fn, software_version):
     model = {'path': str(target), 'software_version': software_version, 'evidence': 'real',
              'exported_at': datetime.now(timezone.utc).isoformat(),
              'sha256': hashlib.sha256(target.read_bytes()).hexdigest()}
-    normalized = normalize_snapshot(saved, model, manifest['case_id'])
+    normalized = normalize_snapshot(saved, model, manifest['case_id'], mapping=mapping)
     # A sidecar describes how to read native fields, never carries expected parameter values.
     sidecar = {'case_id': manifest['case_id'], 'mapping': mapping}
     target.with_suffix('.mapping.json').write_text(json.dumps(sidecar, ensure_ascii=False, indent=2), encoding='utf-8')

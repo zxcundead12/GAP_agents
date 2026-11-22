@@ -1,0 +1,200 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "gap_export",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "case_id",
+    "model",
+    "nodes",
+    "pipes",
+    "valves"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "case_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "model": {
+      "type": "object",
+      "required": [
+        "path",
+        "software_version",
+        "exported_at",
+        "evidence"
+      ],
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "software_version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "exported_at": {
+          "type": "string",
+          "minLength": 1
+        },
+        "evidence": {
+          "enum": [
+            "real",
+            "synthetic"
+          ]
+        }
+      }
+    },
+    "nodes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "kind": {
+            "enum": [
+              "junction",
+              "source",
+              "boundary"
+            ]
+          },
+          "original_label": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "id",
+          "kind",
+          "original_label"
+        ]
+      }
+    },
+    "pipes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "from_node": {
+            "type": "string",
+            "minLength": 1
+          },
+          "to_node": {
+            "type": "string",
+            "minLength": 1
+          },
+          "parameters": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "length_m": {
+                "type": [
+                  "number",
+                  "null"
+                ],
+                "exclusiveMinimum": 0,
+                "x-unit": "m"
+              },
+              "outer_diameter_mm": {
+                "type": [
+                  "number",
+                  "null"
+                ],
+                "exclusiveMinimum": 0,
+                "x-unit": "mm"
+              },
+              "wall_thickness_mm": {
+                "type": [
+                  "number",
+                  "null"
+                ],
+                "exclusiveMinimum": 0,
+                "x-unit": "mm"
+              },
+              "inner_diameter_mm": {
+                "type": [
+                  "number",
+                  "null"
+                ],
+                "exclusiveMinimum": 0,
+                "x-unit": "mm"
+              }
+            },
+            "required": [
+              "length_m",
+              "outer_diameter_mm",
+              "wall_thickness_mm",
+              "inner_diameter_mm"
+            ]
+          },
+          "active_state": {
+            "enum": [
+              "active",
+              "inactive",
+              "unknown"
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "from_node",
+          "to_node",
+          "parameters",
+          "active_state"
+        ]
+      }
+    },
+    "valves": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "pipe_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "physical_state": {
+            "enum": [
+              "open",
+              "closed",
+              "unknown"
+            ]
+          },
+          "size_dn_mm": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "exclusiveMinimum": 0
+          },
+          "pressure_rating_raw": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "pipe_id",
+          "physical_state",
+          "size_dn_mm",
+          "pressure_rating_raw"
+        ]
+      }
+    }
+  }
+}

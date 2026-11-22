@@ -12,7 +12,7 @@ import json
 from pathlib import Path
 
 
-_PROFILE = Path(__file__).resolve().parent / "profiles" / "ipm75_capabilities.json"
+_PROFILE = Path(__file__).resolve().parents[1] / "data" / "ipm75_capabilities.json"
 _CAPABILITY_STATUSES = {"documented_unverified", "unverified", "unsupported"}
 
 
@@ -166,10 +166,13 @@ def build_readiness(manifest, validation=None):
             block("CAPABILITY_" + row["id"].upper(), row["note_ru"], row["id"])
     # Keep the backend refusal explicit even if a damaged profile could not load.
     if not any(row["capability_id"] == "production_build" for row in blockers):
-        block("CAPABILITY_PRODUCTION_BUILD", "Текущий backend production build возвращает UNSUPPORTED_MAPPING; исполняемый производственный профиль не подтверждён.", "production_build")
+        block("CAPABILITY_PRODUCTION_BUILD", "Guarded production build реализован, но без подтверждённого runtime-профиля не допускается и возвращает UNSUPPORTED_MAPPING.", "production_build")
     if groups["valves"]:
+        block("VALVE_REPRESENTATION_REVIEW_REQUIRED",
+              "Подтвердите выбранное представление: реализованный reviewed_pipe_mask_with_metadata допускает один клапан на ветвь и хранит DN/рейтинг в COMMENT; native VALVE является отдельной альтернативой, а не обязательным условием этого профиля.",
+              "valve_state")
         block("VALVE_INSERTION_MAPPING_REQUIRED",
-              "Согласуйте размещение и порядок клапанов на pipe_id, вспомогательные узлы/соединения и правило их обратного сворачивания. Эти решения нельзя вывести из одного pipe_id.",
+              "Если выбран native VALVE, отдельно согласуйте вставку, порядок и сворачивание helper-объектов: их нельзя вывести из pipe_id. Для реализованного reviewed masking вставка native VALVE не требуется; нужен собственный reviewed runtime-протокол.",
               "native_source_sink_valve_connections",
               [row["id"] for row in groups["valves"] if _text(row.get("id"))])
     if any(isinstance(row.get("parameters"), dict)
@@ -184,14 +187,14 @@ def build_readiness(manifest, validation=None):
     steps = [
         {"order": 1, "requires_live_gap": False, "action_ru": "Подтвердить инженерный манифест и закрыть неоднозначности; согласовать native типы источников/границ, представление клапанов и единицы.",
          "success_criteria_ru": "Актуальная валидация ready_for_transfer=true и отдельный reviewed mapping; никаких автоподтверждений."},
-        {"order": 2, "requires_live_gap": False, "action_ru": "Подготовить строгий offline compiler структурированных операций и pure normalizer записанных ответов с контролем capability matrix.",
+        {"order": 2, "requires_live_gap": False, "action_ru": "Проверить и расширить тесты реализованных offline compiler, guarded build и pure normalizer; согласовать точный профиль и ограничения метаданных.",
          "success_criteria_ru": "Неподдержанное отображение отклоняется до COM; нормализатор не берёт измеренные значения из манифеста. Тестовые ответы помечены synthetic."},
         {"order": 3, "requires_live_gap": True, "action_ru": "После получения действительной лицензии выполнить отдельный JOINT–JOINT smoke, сохранить, открыть и повторно считать модель.",
          "success_criteria_ru": "Фактические журналы, 2 JOINT + 1 auto-PIPE, корректные концы и отсутствие дубликатов; LASTCMDRET проверяется по типу функции."},
         {"order": 4, "requires_live_gap": True, "action_ru": "На отдельной модели проверить индекс/создание секции PIPE и UNITNAME каждого параметра; записать и независимо прочитать геометрию.",
          "success_criteria_ru": "Доказаны точные теги и единицы Length/ID/OD/Thickness, режим OD/Thickness и обработка FNA/FNAT; угадывания индексов и SI нет."},
-        {"order": 5, "requires_live_gap": True, "action_ru": "Проверить SOURCE/SINK/VALVE соединения, реальное open/closed, DN/рейтинг и сворачивание разрешённых helper-объектов.",
-         "success_criteria_ru": "Закрытый клапан сохраняется физически и блокирует путь; маскирование не подменяет физическое состояние без утверждённого правила."},
+        {"order": 5, "requires_live_gap": True, "action_ru": "Проверить SOURCE/SINK соединения и выбранное представление клапанов: reviewed masking с COMMENT либо отдельно реализованный native VALVE.",
+         "success_criteria_ru": "Проверено утверждённое open/closed и хранение DN/рейтинга. Для masking явно согласованы один клапан на ветвь и семантические метаданные; native VALVE не выдаётся за реализованный этим профилем."},
         {"order": 6, "requires_live_gap": True, "action_ru": "Собрать подтверждённый фрагмент, сохранить/открыть, получить независимый normalized_export и выполнить сравнение с утверждёнными допусками.",
          "success_criteria_ru": "Поле evidence=real ставится только фактическому readback; нет пропусков, лишних объектов или скрытого копирования входных параметров."},
     ]

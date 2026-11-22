@@ -46,7 +46,7 @@ def main(argv=None):
     elif args.command == "prepare-manifest":
         result = service.prepare_manifest_plan(args.manifest, args.mapping)
     elif args.command == "readiness":
-        from .contracts import validate_manifest
+        from gap_manifest.validation import validate_manifest
         from .capabilities import build_readiness
         try:
             manifest_path, manifest, digest = service._read(args.manifest)

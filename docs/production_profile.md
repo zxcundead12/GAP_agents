@@ -23,7 +23,8 @@ LINKITEMS. Геометрия записывается SetValue с GetLastError,
    template_path/template_sha256, verification_path. Шаблон находится в workspace.
 4. Приложить реальный протокол: evidence=real, execution_status=SUCCESS,
    profile_id, software_version, mapping_sha256, verified_features,
-   model:{path,sha256}, journal:{path,sha256}.
+   model:{path,sha256}, journal:{path,sha256}. Сам протокол требует отдельные
+   review_status=confirmed, reviewed_by, reviewed_at; review mapping его не заменяет.
 5. verified_features: node_types, connections, pipe_geometry, units,
    valve_masking, metadata_readback. Версия: IPM 7.5 Build 600 / GAP 8.5.
 
@@ -32,6 +33,14 @@ sort_keys=True, ensure_ascii=False). Модель проверки и журна
 хешам. Редактирование JSON не доказывает правильность наблюдений: ответственный
 инженер проверяет реальные вызовы и сопоставимость условий. Unit-фикстуры не
 используются как рабочий протокол.
+
+Для evidence=real нормализатор требует именно проверяемый mapping и сверяет
+native TYPE с выбранным типом каждого семантического узла. Общий список допустимых
+типов SOURCE/WELL не разрешает незаметно заменить утверждённый SOURCE на WELL.
+До формирования тегов из readback проверяются native TYPE и короткий LABEL
+профиля (N/P и 8 шестнадцатеричных символов). Поля реального normalized_export
+берутся из прочитанной модели; утверждённое хранение DN/рейтинга/состояния в COMMENT
+остается явно отмеченным семантическим представлением, а не native VALVE.
 
 Затем нужны готовый манифест и разрешение на конкретный план. Незакрытая
 предпосылка даёт NOT_READY/UNSUPPORTED_MAPPING до COM. При сбое возможна частично

@@ -1,80 +1,160 @@
-# GAP agents — участник 2
+# AG(AY)ENT — проверяемый перенос схемы в GAP
 
-В этом репозитории только MCP-сервер и управление GAP через OpenServer.
-LLM-агент, инженерный манифест/разметка, исходные схемы и код проверки участника 1
-сюда не включены. Лицензии, модели, ключи, окружения и локальные журналы не публикуются.
+Запрос → настоящая LLM → типизированная задача → проверка входов → конкретный план
+→ локальное подтверждение → MCP → GAP → независимый экспорт → инженерный отчёт.
 
-## Что реализовано
+## Текущее состояние
 
-- 6 типизированных MCP-инструментов, транспорт stdio.
-- OpenServer COM-worker в отдельном процессе, проверка native ошибок и таймаута.
-- Технический пример: 2 JOINT, соединение с implicit PIPE, сохранение, открытие,
-  обратное чтение и повтор без дубликатов.
-- Неизменяемые планы, отдельное локальное подтверждение, SHA-256 и SQLite ledger.
-- Защита от повторного/параллельного исполнения и записи поверх чужой сессии GAP.
-- Offline-компилятор подтверждённого графа, guarded production-профиль,
-  копирование шаблона, SetValue/GetValue и независимая нормализация снимка.
-- Диагностика метаданных лицензии без вывода ключей и без активации.
+Реализованы проверка/сравнение манифеста, HTML/CSV, MCP-сервер, планы/подтверждения,
+COM-worker, клиент OpenAI-совместимого API и консольный интерфейс. Добавлены offline
+компилятор производственного фрагмента и независимый нормализатор снимка GAP.
 
-## Установка и проверка
+**Инженерная приёмка ещё не выполнена.** Кандидат: 21 узел/порт, 20 ветвей,
+2 кустовых источника, 11 клапанов (8 открытых, 3 закрытых). Все записи pending;
+8 инженерных вопросов, 80 неизвестных параметров и неизвестные рабочие состояния
+линий. Исходную схему и легенду нужно подключить локально. Подтверждения преподавателя
+программа не создаёт. Подсчёт внутренних точек УДР требует отдельного согласования.
 
-Windows, Python 3.11+, установленный IPM 7.5 Build 600 / GAP 8.5.
-Из корня репозитория:
+Свежие результаты машины: `outputs/verification/summary.json`. Пользователь удалил
+IPM и планирует переустановку после решения вопроса с лицензией. Исторические
+журналы сохраняют отказ GAP.START(): native 22, No OpenServer license available.
+Они не подтверждают наличие или работоспособность текущей установки.
+
+Настоящая LLM пока не проверена: пользователь выбрал Groq и отложил живой тест.
+Настроены адрес Groq и модель `openai/gpt-oss-20b`; локального ключа пока нет.
+Без ключа возвращается LLM_NOT_CONFIGURED.
+Разбором по ключевым словам модель не подменяется.
+
+## Установка Windows
+
+Python 3.11+; интеграционное окружение — Python 3.13, IPM 7.5 Build 600 / GAP 8.5.
+Все команды выполняются **из корня проекта**, независимо от буквы диска:
 
 ```powershell
 py -m venv .venv
 .venv\Scripts\python.exe -m pip install -r requirements-integration.lock.txt
-.venv\Scripts\python.exe -B -X utf8 -m unittest discover -s tests -v
-.venv\Scripts\python.exe -B -X utf8 scripts/check_mcp_stdio.py --workspace .
+.venv\Scripts\python.exe -B -X utf8 -m gap_agent doctor
 ```
 
-Unit-тесты используют искусственный runner/снимки. Проверка stdio действительно
-запускает MCP-сервер, но не COM и не GAP. Успешные тесты не доказывают наличие лицензии.
+Есть `setup.ps1` и `run-agent.ps1`. Если `py` не находит Python, укажи путь
+к установленному интерпретатору:
 
 ```powershell
-.venv\Scripts\python.exe -B -X utf8 -m gap_integration environment
-.venv\Scripts\python.exe -B -X utf8 -m gap_integration probe
-.venv\Scripts\python.exe -B -X utf8 -m gap_integration.mcp_server --workspace .
+.\setup.ps1 -Python 'ПОЛНЫЙ_ПУТЬ_К_python.exe'
 ```
 
-## Технический пример в реальном GAP
+Если перенесённый `.venv` ссылается на отсутствующий Python, `setup.ps1`
+восстанавливает его выбранным интерпретатором и устанавливает зависимости.
+
+GAP/OpenServer и действующая лицензия предоставляются отдельно.
+
+## Настройка Groq или другого API
+
+Файл `data/agent_config.json`, протокол Chat Completions. По умолчанию явно выбрана
+`openai/gpt-oss-20b`, поддерживающая строгий Structured Outputs по
+[документации Groq](https://console.groq.com/docs/structured-outputs).
+Модель можно переопределить через GAP_LLM_MODEL. Ключ вводится локально:
 
 ```powershell
-.venv\Scripts\python.exe -B -X utf8 -m gap_integration prepare-smoke
+$env:GROQ_API_KEY = [System.Net.NetworkCredential]::new('', (Read-Host 'Ключ Groq' -AsSecureString)).Password
+.venv\Scripts\python.exe -B -X utf8 -m gap_agent request 'Проверь исходный манифест и его связность'
 ```
 
-Команда показывает план и целевую новую модель, но не запускает создание объектов.
-После просмотра конкретного плана оператор отдельно подтверждает и исполняет его:
+Для другого API задай GAP_LLM_BASE_URL и имя переменной ключа в конфигурации.
+Удалённый API требует HTTPS. Переадресация запросов запрещена. JSON Schema включена
+по умолчанию; для модели с JSON Mode явно задай response_format=json_object.
+Локальная строгая проверка сохраняется. Автоматического перехода на другую модель нет.
+
+Документация: [Groq compatibility](https://console.groq.com/docs/openai),
+[Structured Outputs](https://console.groq.com/docs/structured-outputs).
+
+## Пользовательский запуск
 
 ```powershell
-.venv\Scripts\python.exe -B -X utf8 -m gap_integration approve --plan-id PLAN_ID --approved-by 'ИМЯ'
-.venv\Scripts\python.exe -B -X utf8 -m gap_integration execute --plan-id PLAN_ID --approval-id APPROVAL_ID
+.\run-agent.ps1
 ```
 
-Подставляются идентификаторы фактических ответов. approve не является MCP-инструментом.
-При открытой чужой сессии тест отказывается переключать модель. Таймаут не считается
-отменой GAP; неопределённый результат требует ручного разбора через acknowledge.
+Либо `.venv\Scripts\python.exe -B -X utf8 -m gap_agent chat`.
+Перед записью показываются цель, действия и хеш. Пользователь вводит показанную
+фразу и имя. LLM не имеет инструмента подтверждения.
 
-На машине разработки COM был доступен, но GAP.START() вернул native 22:
-`No OpenServer license available`. Сохранённая модель и успешный native round-trip
-не заявляются. Для их проверки нужен действующий доступ к OpenServer.
+```powershell
+.venv\Scripts\python.exe -B -X utf8 -m gap_agent request 'Подготовь технический пример: два узла и одна труба'
+.venv\Scripts\python.exe -B -X utf8 -m gap_agent approve --run-id RUN_ID --operator 'ИМЯ' --sha256 ХЕШ_ПЛАНА
+.venv\Scripts\python.exe -B -X utf8 -m gap_agent execute --run-id RUN_ID
+```
 
-## Совместная работа с участниками 1 и 3
+RUN_ID и хеш берутся из фактического ответа. Повтор возвращает сохранённый результат.
+Таймаут не считается отменой; неопределённое выполнение не повторяется автоматически.
+После фактической ручной проверки GAP используется локальная команда
+`python -m gap_agent acknowledge --run-id RUN_ID --operator 'ИМЯ' --note 'Что проверено'`.
+Она снимает блокировку новых планов, сохраняет исходный результат и не повторяет старый план.
 
-Для производственного манифеста нужен внешний модуль участника 1:
-`gap_manifest.validation.validate_manifest(manifest, project_root, check_sources=True)`.
-Он возвращает schema_version, case_id, execution_status, ready_for_transfer,
-issues и статистику. Реализация инженерной проверки намеренно не скопирована сюда.
-Без неё prepare-manifest/readiness возвращают NOT_READY с кодом
-ENGINEERING_VALIDATOR_UNAVAILABLE. MCP, probe и smoke от неё не зависят.
+## Исходники и согласование
 
-Участник 3 вызывает инструменты, описанные в docs/interfaces.md. Команды OpenServer
-формирует код адаптера; инструмента произвольной команды или самоподтверждения нет.
+```powershell
+.venv\Scripts\python.exe -B -X utf8 scripts/connect_sources.py --scheme 'ПУТЬ_К_СХЕМЕ.pdf' --legend 'ПУТЬ_К_README.txt'
+.venv\Scripts\python.exe -B -X utf8 scripts/review_packet.py
+```
 
-Производственный профиль: data/gap_mapping.template.json. Он пока pending.
-Поддерживаемое представление — один физический клапан на ветвь через отдельно
-согласованное отключение ветви с метаданными; это не native VALVE.
-Геометрия считывается из native полей; нужны проверенные индексы, единицы и шаблон
-Enthalpy Balance для OD/стенки. См. docs/production_profile.md.
-Неподтверждённый профиль отклоняется до COM. Полноценный перенос фрагмента требует
-инженерного согласования, лицензии и реальных испытаний профиля.
+Подключение проверяет исходные SHA-256, не меняя манифест и статусы. Другую редакцию
+документа нельзя подключать как старую. В outputs/review_packet создаются отчёт,
+шесть CSV (узлы, трубы, клапаны, источники, границы, вопросы) и лист для согласования.
+Разметка — outputs/candidate_annotated.png. Решения фиксируются по docs/review_guide.md.
+В текущей папке исходники доступны по относительным путям манифеста; повторное
+подключение требуется при их переносе.
+
+## Производственный профиль
+
+data/gap_mapping.template.json — неподтверждённая заготовка. Реализованный профиль
+поддерживает SOURCE/WELL, JOINT, SINK/SEP, PIPE и отдельно согласованное представление
+клапана отключением ветви. Допускается один клапан на ветвь. Native VALVE и сложная
+последовательность арматуры требуют другого проверенного профиля.
+
+Геометрия пишется/читается из native полей с проверкой единиц; OD/стенка требуют
+подтверждённого шаблона Enthalpy Balance. Подписи, DN, рейтинг и физическое состояние
+клапана хранятся как обозначенные метаданные COMMENT и сверяются с native ISMASKED.
+Метаданные не выдаются за native геометрию или измерение состояния.
+
+До COM проверяются манифест, профиль, шаблон и отдельное реальное доказательство
+испытаний всех возможностей. Без них — UNSUPPORTED_MAPPING. Offline-тесты не
+подтверждают работу GAP. См. docs/production_profile.md.
+
+## Воспроизведение
+
+Одна команда: тесты, текущая диагностика и настоящий MCP-протокол:
+
+```powershell
+.venv\Scripts\python.exe -B -X utf8 scripts/verify_project.py
+```
+
+Реальный технический пример в новом файле запускается явно:
+
+```powershell
+.venv\Scripts\python.exe -B -X utf8 scripts/verify_project.py --gap-smoke
+```
+
+Чужая сессия GAP не переключается. Лицензионные ошибки/таймауты сохраняются как
+отдельные статусы; файл лицензии не доказывает доступность OpenServer.
+
+После настройки API:
+
+```powershell
+.venv\Scripts\python.exe -B -X utf8 scripts/evaluate_llm.py
+```
+
+Проверяются 9 запросов, включая парафразы и запрос вне полномочий, плюс отключённая
+LLM. GAP не вызывается. Без API покрытие 0 и NOT_ASSESSED. Искусственные unit-тесты
+не являются живой проверкой LLM. Демо — docs/demo.md, контракты — docs/agent_contracts.md.
+
+## Состав
+
+- gap_manifest — источники, валидация, сравнение и отчёт.
+- gap_integration — MCP, планы/SQLite, COM, компилятор и нормализатор.
+- gap_agent — LLM, типизированная задача, MCP-клиент, AgentResult и консоль.
+- schemas — машиночитаемые общие форматы.
+- outputs/agent/run_.../journal.jsonl — общий trace_id и ссылки на native trace_id.
+- outputs/verification — фактические проверки этой машины.
+
+Ключи, лицензии, исходники и производственные модели не публикуются. Подтверждённая
+гидравлика потребует отдельного комплекта граничных условий, PVT и допусков.

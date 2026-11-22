@@ -10,8 +10,6 @@ import sqlite3
 import tempfile
 import threading
 import unittest
-from unittest.mock import patch
-from synthetic_engineering import validate_synthetic
 
 from gap_integration.service import GapService
 
@@ -32,9 +30,6 @@ class FakeRunner:
 
 class GapServiceTests(unittest.TestCase):
     def setUp(self):
-        validator = patch('gap_integration.service.validate_manifest', side_effect=validate_synthetic)
-        validator.start()
-        self.addCleanup(validator.stop)
         work = Path(__file__).resolve().parents[1] / "work"
         work.mkdir(exist_ok=True)
         self.temporary = tempfile.TemporaryDirectory(prefix="gap-service-tests-", dir=work)
