@@ -1,0 +1,3172 @@
+{
+  "schema_version": "1.0",
+  "case_id": "palyanovo_udr_candidate_2025",
+  "sources": [
+    {
+      "id": "scheme_pdf",
+      "kind": "pdf",
+      "path": "../GAP/Тех.схема НСС, НН Пальяновского мр 2025.pdf",
+      "sha256": "2559831e5bec89c07948adec5bb54958a4068a3c87989333ff0305f0b2fe8025",
+      "pages": [
+        {
+          "number": 1,
+          "width_pt": 1296,
+          "height_pt": 1818
+        }
+      ]
+    },
+    {
+      "id": "scheme_readme",
+      "kind": "text",
+      "path": "../GAP/README.txt",
+      "sha256": "4eadda8bc9c8af306d5596b713126ddd510893b995e42d7d3b1a85803c7e2edc",
+      "pages": []
+    }
+  ],
+  "selection": {
+    "id": "UDR_UPPER_CANDIDATE",
+    "review_status": "pending",
+    "reviewed_by": null,
+    "reviewed_at": null,
+    "regions": [
+      {
+        "source_id": "scheme_pdf",
+        "page": 1,
+        "bbox": [
+          45,
+          1250,
+          470,
+          1466
+        ],
+        "raw_text": "Предложенный верхний фрагмент деталировки УДР",
+        "method": "visual",
+        "fields": [
+          "selection"
+        ]
+      },
+      {
+        "source_id": "scheme_pdf",
+        "page": 1,
+        "bbox": [
+          275,
+          1010,
+          642,
+          1243
+        ],
+        "raw_text": "Основной вид для привязки портов деталировки",
+        "method": "visual",
+        "fields": [
+          "context"
+        ]
+      }
+    ],
+    "required_minima": {
+      "nodes": 10,
+      "pipes": 12,
+      "sources": 2,
+      "valves": 4
+    },
+    "notes": "Черновой кандидат, не утверждён преподавателем. 21 узел/порт (10 внутренних junction, 2 кустовых источника, 9 границ), 20 реальных непрерывно прослеживаемых внутренних ветвей, 11 клапанов. Подсчёт внутренних узлов/ветвей для учебных минимумов требует согласования. Обрезанные вводы не считаются полными трассами; все неизвестные параметры null. Граф физически связный; закрытая арматура ограничивает проток. Ни одна запись не подтверждена."
+  },
+  "nodes": [
+    {
+      "id": "UDR_J01",
+      "original_label": "Без подписи",
+      "kind": "junction",
+      "context": "УДР: верхний коллектор, отвод К-417",
+      "position": [
+        103.44,
+        1316.16
+      ],
+      "boundary_reason": null,
+      "source_refs": [
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            99.44,
+            1312.16,
+            107.44,
+            1320.16
+          ],
+          "raw_text": "Неподписанное разветвление/порт на деталировке УДР",
+          "method": "visual",
+          "fields": [
+            "position",
+            "kind"
+          ]
+        },
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            99.44,
+            1312.16,
+            107.44,
+            1320.16
+          ],
+          "raw_text": "Обозначение отсутствует; стабильный ID назначен при разметке",
+          "method": "derived",
+          "fields": [
+            "original_label",
+            "context"
+          ]
+        }
+      ],
+      "review_status": "pending",
+      "reviewed_by": null,
+      "reviewed_at": null
+    },
+    {
+      "id": "UDR_J02",
+      "original_label": "Без подписи",
+      "kind": "junction",
+      "context": "УДР: верхний коллектор, ввод К-426",
+      "position": [
+        110.4,
+        1316.16
+      ],
+      "boundary_reason": null,
+      "source_refs": [
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            106.4,
+            1312.16,
+            114.4,
+            1320.16
+          ],
+          "raw_text": "Неподписанное разветвление/порт на деталировке УДР",
+          "method": "visual",
+          "fields": [
+            "position",
+            "kind"
+          ]
+        },
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            106.4,
+            1312.16,
+            114.4,
+            1320.16
+          ],
+          "raw_text": "Обозначение отсутствует; стабильный ID назначен при разметке",
+          "method": "derived",
+          "fields": [
+            "original_label",
+            "context"
+          ]
+        }
+      ],
+      "review_status": "pending",
+      "reviewed_by": null,
+      "reviewed_at": null
+    },
+    {
+      "id": "UDR_J03",
+      "original_label": "Без подписи",
+      "kind": "junction",
+      "context": "УДР: верхний коллектор, ответвление №5",
+      "position": [
+        161.28,
+        1316.16
+      ],
+      "boundary_reason": null,
+      "source_refs": [
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            157.28,
+            1312.16,
+            165.28,
+            1320.16
+          ],
+          "raw_text": "Неподписанное разветвление/порт на деталировке УДР",
+          "method": "visual",
+          "fields": [
+            "position",
+            "kind"
+          ]
+        },
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            157.28,
+            1312.16,
+            165.28,
+            1320.16
+          ],
+          "raw_text": "Обозначение отсутствует; стабильный ID назначен при разметке",
+          "method": "derived",
+          "fields": [
+            "original_label",
+            "context"
+          ]
+        }
+      ],
+      "review_status": "pending",
+      "reviewed_by": null,
+      "reviewed_at": null
+    },
+    {
+      "id": "UDR_J04",
+      "original_label": "Без подписи",
+      "kind": "junction",
+      "context": "УДР: верхний коллектор, ответвление №6",
+      "position": [
+        203.04,
+        1316.16
+      ],
+      "boundary_reason": null,
+      "source_refs": [
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            199.04,
+            1312.16,
+            207.04,
+            1320.16
+          ],
+          "raw_text": "Неподписанное разветвление/порт на деталировке УДР",
+          "method": "visual",
+          "fields": [
+            "position",
+            "kind"
+          ]
+        },
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            199.04,
+            1312.16,
+            207.04,
+            1320.16
+          ],
+          "raw_text": "Обозначение отсутствует; стабильный ID назначен при разметке",
+          "method": "derived",
+          "fields": [
+            "original_label",
+            "context"
+          ]
+        }
+      ],
+      "review_status": "pending",
+      "reviewed_by": null,
+      "reviewed_at": null
+    },
+    {
+      "id": "UDR_J05",
+      "original_label": "Без подписи",
+      "kind": "junction",
+      "context": "УДР: верхний коллектор, ответвление №7",
+      "position": [
+        240.0,
+        1316.16
+      ],
+      "boundary_reason": null,
+      "source_refs": [
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            236.0,
+            1312.16,
+            244.0,
+            1320.16
+          ],
+          "raw_text": "Неподписанное разветвление/порт на деталировке УДР",
+          "method": "visual",
+          "fields": [
+            "position",
+            "kind"
+          ]
+        },
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            236.0,
+            1312.16,
+            244.0,
+            1320.16
+          ],
+          "raw_text": "Обозначение отсутствует; стабильный ID назначен при разметке",
+          "method": "derived",
+          "fields": [
+            "original_label",
+            "context"
+          ]
+        }
+      ],
+      "review_status": "pending",
+      "reviewed_by": null,
+      "reviewed_at": null
+    },
+    {
+      "id": "UDR_J06",
+      "original_label": "Без подписи",
+      "kind": "junction",
+      "context": "УДР: верхний коллектор, ввод К-328",
+      "position": [
+        259.44,
+        1316.16
+      ],
+      "boundary_reason": null,
+      "source_refs": [
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            255.44,
+            1312.16,
+            263.44,
+            1320.16
+          ],
+          "raw_text": "Неподписанное разветвление/порт на деталировке УДР",
+          "method": "visual",
+          "fields": [
+            "position",
+            "kind"
+          ]
+        },
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            255.44,
+            1312.16,
+            263.44,
+            1320.16
+          ],
+          "raw_text": "Обозначение отсутствует; стабильный ID назначен при разметке",
+          "method": "derived",
+          "fields": [
+            "original_label",
+            "context"
+          ]
+        }
+      ],
+      "review_status": "pending",
+      "reviewed_by": null,
+      "reviewed_at": null
+    },
+    {
+      "id": "UDR_J07",
+      "original_label": "Без подписи",
+      "kind": "junction",
+      "context": "УДР: верхний коллектор, ответвление №8",
+      "position": [
+        272.4,
+        1316.16
+      ],
+      "boundary_reason": null,
+      "source_refs": [
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            268.4,
+            1312.16,
+            276.4,
+            1320.16
+          ],
+          "raw_text": "Неподписанное разветвление/порт на деталировке УДР",
+          "method": "visual",
+          "fields": [
+            "position",
+            "kind"
+          ]
+        },
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            268.4,
+            1312.16,
+            276.4,
+            1320.16
+          ],
+          "raw_text": "Обозначение отсутствует; стабильный ID назначен при разметке",
+          "method": "derived",
+          "fields": [
+            "original_label",
+            "context"
+          ]
+        }
+      ],
+      "review_status": "pending",
+      "reviewed_by": null,
+      "reviewed_at": null
+    },
+    {
+      "id": "UDR_J08",
+      "original_label": "Без подписи",
+      "kind": "junction",
+      "context": "УДР: ввод К-340/К-335, ответвление №5/16",
+      "position": [
+        161.28,
+        1408.56
+      ],
+      "boundary_reason": null,
+      "source_refs": [
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            157.28,
+            1404.56,
+            165.28,
+            1412.56
+          ],
+          "raw_text": "Неподписанное разветвление/порт на деталировке УДР",
+          "method": "visual",
+          "fields": [
+            "position",
+            "kind"
+          ]
+        },
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            157.28,
+            1404.56,
+            165.28,
+            1412.56
+          ],
+          "raw_text": "Обозначение отсутствует; стабильный ID назначен при разметке",
+          "method": "derived",
+          "fields": [
+            "original_label",
+            "context"
+          ]
+        }
+      ],
+      "review_status": "pending",
+      "reviewed_by": null,
+      "reviewed_at": null
+    },
+    {
+      "id": "UDR_J09",
+      "original_label": "Без подписи",
+      "kind": "junction",
+      "context": "УДР: ввод Р-543, ответвление №7/18",
+      "position": [
+        240.0,
+        1380.0
+      ],
+      "boundary_reason": null,
+      "source_refs": [
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            236.0,
+            1376.0,
+            244.0,
+            1384.0
+          ],
+          "raw_text": "Неподписанное разветвление/порт на деталировке УДР",
+          "method": "visual",
+          "fields": [
+            "position",
+            "kind"
+          ]
+        },
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            236.0,
+            1376.0,
+            244.0,
+            1384.0
+          ],
+          "raw_text": "Обозначение отсутствует; стабильный ID назначен при разметке",
+          "method": "derived",
+          "fields": [
+            "original_label",
+            "context"
+          ]
+        }
+      ],
+      "review_status": "pending",
+      "reviewed_by": null,
+      "reviewed_at": null
+    },
+    {
+      "id": "UDR_J10",
+      "original_label": "Без подписи",
+      "kind": "junction",
+      "context": "УДР: ввод К-331 АГЗУ1, ответвление №8/19",
+      "position": [
+        272.4,
+        1353.12
+      ],
+      "boundary_reason": null,
+      "source_refs": [
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            268.4,
+            1349.12,
+            276.4,
+            1357.12
+          ],
+          "raw_text": "Неподписанное разветвление/порт на деталировке УДР",
+          "method": "visual",
+          "fields": [
+            "position",
+            "kind"
+          ]
+        },
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            268.4,
+            1349.12,
+            276.4,
+            1357.12
+          ],
+          "raw_text": "Обозначение отсутствует; стабильный ID назначен при разметке",
+          "method": "derived",
+          "fields": [
+            "original_label",
+            "context"
+          ]
+        }
+      ],
+      "review_status": "pending",
+      "reviewed_by": null,
+      "reviewed_at": null
+    },
+    {
+      "id": "SRC_K328",
+      "original_label": "К - 328",
+      "kind": "source",
+      "context": "УДР: порт кустового ввода К-328",
+      "position": [
+        259.44,
+        1263.36
+      ],
+      "boundary_reason": null,
+      "source_refs": [
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            255.44,
+            1259.36,
+            263.44,
+            1267.36
+          ],
+          "raw_text": "К - 328",
+          "method": "visual",
+          "fields": [
+            "position",
+            "kind"
+          ]
+        },
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            259,
+            1262,
+            286,
+            1270
+          ],
+          "raw_text": "К - 328",
+          "method": "visual",
+          "fields": [
+            "original_label",
+            "kind"
+          ]
+        },
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            281,
+            1075,
+            365,
+            1130
+          ],
+          "raw_text": "К 328; К-328 - УДР",
+          "method": "visual",
+          "fields": [
+            "kind",
+            "context"
+          ]
+        }
+      ],
+      "review_status": "pending",
+      "reviewed_by": null,
+      "reviewed_at": null
+    },
+    {
+      "id": "SRC_K331_AGZU1",
+      "original_label": "К – 331 АГЗУ№1",
+      "kind": "source",
+      "context": "УДР: порт кустового ввода К-331 АГЗУ1",
+      "position": [
+        406.56,
+        1341.6
+      ],
+      "boundary_reason": null,
+      "source_refs": [
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            402.56,
+            1337.6,
+            410.56,
+            1345.6
+          ],
+          "raw_text": "К – 331 АГЗУ№1",
+          "method": "visual",
+          "fields": [
+            "position",
+            "kind"
+          ]
+        },
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            390,
+            1328,
+            443,
+            1343
+          ],
+          "raw_text": "К – 331 АГЗУ№1",
+          "method": "visual",
+          "fields": [
+            "original_label",
+            "kind"
+          ]
+        },
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            531,
+            1012,
+            631,
+            1145
+          ],
+          "raw_text": "К -331; К-331 – УДР",
+          "method": "visual",
+          "fields": [
+            "kind",
+            "context"
+          ]
+        }
+      ],
+      "review_status": "pending",
+      "reviewed_by": null,
+      "reviewed_at": null
+    },
+    {
+      "id": "BD_UPSV_TOP",
+      "original_label": "УПСВ",
+      "kind": "boundary",
+      "context": "УДР: верхний выход к УПСВ",
+      "position": [
+        69.84,
+        1316.16
+      ],
+      "boundary_reason": "Технологический объект УПСВ вне выбранного фрагмента; сохранён порт верхнего коллектора.",
+      "source_refs": [
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            65.84,
+            1312.16,
+            73.84,
+            1320.16
+          ],
+          "raw_text": "УПСВ",
+          "method": "visual",
+          "fields": [
+            "position",
+            "kind"
+          ]
+        },
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            74,
+            1305,
+            94,
+            1312
+          ],
+          "raw_text": "УПСВ",
+          "method": "visual",
+          "fields": [
+            "original_label"
+          ]
+        }
+      ],
+      "review_status": "pending",
+      "reviewed_by": null,
+      "reviewed_at": null
+    },
+    {
+      "id": "BD_K417",
+      "original_label": "К-417",
+      "kind": "boundary",
+      "context": "УДР: входная граница К-417",
+      "position": [
+        69.6,
+        1392.0
+      ],
+      "boundary_reason": "В деталировке показан обрезанный ввод. Полный маршрут от К-417 и его параметры здесь не восстанавливаются.",
+      "source_refs": [
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            65.6,
+            1388.0,
+            73.6,
+            1396.0
+          ],
+          "raw_text": "К-417",
+          "method": "visual",
+          "fields": [
+            "position",
+            "kind"
+          ]
+        },
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            73,
+            1383,
+            90,
+            1392
+          ],
+          "raw_text": "К-417",
+          "method": "visual",
+          "fields": [
+            "original_label"
+          ]
+        }
+      ],
+      "review_status": "pending",
+      "reviewed_by": null,
+      "reviewed_at": null
+    },
+    {
+      "id": "BD_K426",
+      "original_label": "К - 426",
+      "kind": "boundary",
+      "context": "УДР: входная граница К-426",
+      "position": [
+        110.4,
+        1256.4
+      ],
+      "boundary_reason": "Верхний вход деталировки обрезан; полный трубопровод К-426—УДР не входит в этот граф.",
+      "source_refs": [
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            106.4,
+            1252.4,
+            114.4,
+            1260.4
+          ],
+          "raw_text": "К - 426",
+          "method": "visual",
+          "fields": [
+            "position",
+            "kind"
+          ]
+        },
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            114,
+            1257,
+            137,
+            1267
+          ],
+          "raw_text": "К - 426",
+          "method": "visual",
+          "fields": [
+            "original_label"
+          ]
+        }
+      ],
+      "review_status": "pending",
+      "reviewed_by": null,
+      "reviewed_at": null
+    },
+    {
+      "id": "BD_R543",
+      "original_label": "Р-543",
+      "kind": "boundary",
+      "context": "УДР: входная граница Р-543",
+      "position": [
+        406.56,
+        1380.0
+      ],
+      "boundary_reason": "Показан порт ввода, а не полный трубопровод от скважины/точки врезки.",
+      "source_refs": [
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            402.56,
+            1376.0,
+            410.56,
+            1384.0
+          ],
+          "raw_text": "Р-543",
+          "method": "visual",
+          "fields": [
+            "position",
+            "kind"
+          ]
+        },
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            388,
+            1372,
+            407,
+            1380
+          ],
+          "raw_text": "Р-543",
+          "method": "visual",
+          "fields": [
+            "original_label"
+          ]
+        }
+      ],
+      "review_status": "pending",
+      "reviewed_by": null,
+      "reviewed_at": null
+    },
+    {
+      "id": "BD_K340_K335",
+      "original_label": "К - 340, К - 335",
+      "kind": "boundary",
+      "context": "УДР: общий вход от К-340 и К-335",
+      "position": [
+        68.64,
+        1408.56
+      ],
+      "boundary_reason": "Источник показывает один общий ввод. Разделение на отдельные кустовые потоки здесь отсутствует.",
+      "source_refs": [
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            64.64,
+            1404.56,
+            72.64,
+            1412.56
+          ],
+          "raw_text": "К - 340, К - 335",
+          "method": "visual",
+          "fields": [
+            "position",
+            "kind"
+          ]
+        },
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            66,
+            1410,
+            112,
+            1419
+          ],
+          "raw_text": "К - 340, К - 335",
+          "method": "visual",
+          "fields": [
+            "original_label"
+          ]
+        }
+      ],
+      "review_status": "pending",
+      "reviewed_by": null,
+      "reviewed_at": null
+    },
+    {
+      "id": "BD_LOWER_16",
+      "original_label": "Без подписи",
+      "kind": "boundary",
+      "context": "УДР: отсечение перед №16",
+      "position": [
+        161.28,
+        1421.76
+      ],
+      "boundary_reason": "Условная граница фрагмента на непрерывной линии перед нижним клапаном №16; клапан и нижний коллектор вне графа.",
+      "source_refs": [
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            157.28,
+            1417.76,
+            165.28,
+            1425.76
+          ],
+          "raw_text": "Неподписанное разветвление/порт на деталировке УДР",
+          "method": "visual",
+          "fields": [
+            "position",
+            "kind"
+          ]
+        },
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            157.28,
+            1417.76,
+            165.28,
+            1425.76
+          ],
+          "raw_text": "Обозначение отсутствует; стабильный ID назначен при разметке",
+          "method": "derived",
+          "fields": [
+            "original_label",
+            "context"
+          ]
+        }
+      ],
+      "review_status": "pending",
+      "reviewed_by": null,
+      "reviewed_at": null
+    },
+    {
+      "id": "BD_LOWER_18",
+      "original_label": "Без подписи",
+      "kind": "boundary",
+      "context": "УДР: отсечение перед №18",
+      "position": [
+        240.0,
+        1421.76
+      ],
+      "boundary_reason": "Условная граница фрагмента перед нижним клапаном №18; боковая ветвь №23 требует отдельного согласования.",
+      "source_refs": [
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            236.0,
+            1417.76,
+            244.0,
+            1425.76
+          ],
+          "raw_text": "Неподписанное разветвление/порт на деталировке УДР",
+          "method": "visual",
+          "fields": [
+            "position",
+            "kind"
+          ]
+        },
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            236.0,
+            1417.76,
+            244.0,
+            1425.76
+          ],
+          "raw_text": "Обозначение отсутствует; стабильный ID назначен при разметке",
+          "method": "derived",
+          "fields": [
+            "original_label",
+            "context"
+          ]
+        }
+      ],
+      "review_status": "pending",
+      "reviewed_by": null,
+      "reviewed_at": null
+    },
+    {
+      "id": "BD_LOWER_19",
+      "original_label": "Без подписи",
+      "kind": "boundary",
+      "context": "УДР: отсечение перед №19",
+      "position": [
+        272.4,
+        1421.76
+      ],
+      "boundary_reason": "Условная граница фрагмента перед нижним клапаном №19; пересечение с Р-543 проходит без соединения.",
+      "source_refs": [
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            268.4,
+            1417.76,
+            276.4,
+            1425.76
+          ],
+          "raw_text": "Неподписанное разветвление/порт на деталировке УДР",
+          "method": "visual",
+          "fields": [
+            "position",
+            "kind"
+          ]
+        },
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            268.4,
+            1417.76,
+            276.4,
+            1425.76
+          ],
+          "raw_text": "Обозначение отсутствует; стабильный ID назначен при разметке",
+          "method": "derived",
+          "fields": [
+            "original_label",
+            "context"
+          ]
+        }
+      ],
+      "review_status": "pending",
+      "reviewed_by": null,
+      "reviewed_at": null
+    },
+    {
+      "id": "BD_V06_END",
+      "original_label": "Без подписи",
+      "kind": "boundary",
+      "context": "УДР: видимый конец ответвления №6",
+      "position": [
+        203.04,
+        1348.32
+      ],
+      "boundary_reason": "Ниже №6 линия отсутствует. Соединение с №17 не добавлено; требуется трактовка инженера.",
+      "source_refs": [
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            199.04,
+            1344.32,
+            207.04,
+            1352.32
+          ],
+          "raw_text": "Неподписанное разветвление/порт на деталировке УДР",
+          "method": "visual",
+          "fields": [
+            "position",
+            "kind"
+          ]
+        },
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            199.04,
+            1344.32,
+            207.04,
+            1352.32
+          ],
+          "raw_text": "Обозначение отсутствует; стабильный ID назначен при разметке",
+          "method": "derived",
+          "fields": [
+            "original_label",
+            "context"
+          ]
+        }
+      ],
+      "review_status": "pending",
+      "reviewed_by": null,
+      "reviewed_at": null
+    }
+  ],
+  "pipes": [
+    {
+      "id": "P01",
+      "original_label": "Без подписи",
+      "from_node": "BD_UPSV_TOP",
+      "to_node": "UDR_J01",
+      "role": "internal_connector",
+      "line_class": "трубопровод без ВНП (чёрная линия по легенде)",
+      "active_state": "unknown",
+      "parameters": {
+        "length_m": null,
+        "outer_diameter_mm": null,
+        "wall_thickness_mm": null,
+        "inner_diameter_mm": null
+      },
+      "schematic_path": [
+        [
+          69.84,
+          1316.16
+        ],
+        [
+          103.44,
+          1316.16
+        ]
+      ],
+      "source_refs": [
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            67.84,
+            1314.16,
+            105.44,
+            1318.16
+          ],
+          "raw_text": "Непрерывный наблюдаемый участок деталировки УДР; собственного обозначения нет",
+          "method": "visual",
+          "fields": [
+            "from_node",
+            "to_node",
+            "role",
+            "line_class"
+          ]
+        },
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            67.84,
+            1314.16,
+            105.44,
+            1318.16
+          ],
+          "raw_text": "ID назначен разметчиком, а не взят с исходной схемы",
+          "method": "derived",
+          "fields": [
+            "original_label"
+          ]
+        }
+      ],
+      "review_status": "pending",
+      "reviewed_by": null,
+      "reviewed_at": null
+    },
+    {
+      "id": "P02",
+      "original_label": "Без подписи",
+      "from_node": "UDR_J01",
+      "to_node": "UDR_J02",
+      "role": "internal_connector",
+      "line_class": "трубопровод без ВНП (чёрная линия по легенде)",
+      "active_state": "unknown",
+      "parameters": {
+        "length_m": null,
+        "outer_diameter_mm": null,
+        "wall_thickness_mm": null,
+        "inner_diameter_mm": null
+      },
+      "schematic_path": [
+        [
+          103.44,
+          1316.16
+        ],
+        [
+          110.4,
+          1316.16
+        ]
+      ],
+      "source_refs": [
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            101.44,
+            1314.16,
+            112.4,
+            1318.16
+          ],
+          "raw_text": "Непрерывный наблюдаемый участок деталировки УДР; собственного обозначения нет",
+          "method": "visual",
+          "fields": [
+            "from_node",
+            "to_node",
+            "role",
+            "line_class"
+          ]
+        },
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            101.44,
+            1314.16,
+            112.4,
+            1318.16
+          ],
+          "raw_text": "ID назначен разметчиком, а не взят с исходной схемы",
+          "method": "derived",
+          "fields": [
+            "original_label"
+          ]
+        }
+      ],
+      "review_status": "pending",
+      "reviewed_by": null,
+      "reviewed_at": null
+    },
+    {
+      "id": "P03",
+      "original_label": "Без подписи",
+      "from_node": "UDR_J02",
+      "to_node": "UDR_J03",
+      "role": "internal_connector",
+      "line_class": "трубопровод без ВНП (чёрная линия по легенде)",
+      "active_state": "unknown",
+      "parameters": {
+        "length_m": null,
+        "outer_diameter_mm": null,
+        "wall_thickness_mm": null,
+        "inner_diameter_mm": null
+      },
+      "schematic_path": [
+        [
+          110.4,
+          1316.16
+        ],
+        [
+          161.28,
+          1316.16
+        ]
+      ],
+      "source_refs": [
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            108.4,
+            1314.16,
+            163.28,
+            1318.16
+          ],
+          "raw_text": "Непрерывный наблюдаемый участок деталировки УДР; собственного обозначения нет",
+          "method": "visual",
+          "fields": [
+            "from_node",
+            "to_node",
+            "role",
+            "line_class"
+          ]
+        },
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            108.4,
+            1314.16,
+            163.28,
+            1318.16
+          ],
+          "raw_text": "ID назначен разметчиком, а не взят с исходной схемы",
+          "method": "derived",
+          "fields": [
+            "original_label"
+          ]
+        }
+      ],
+      "review_status": "pending",
+      "reviewed_by": null,
+      "reviewed_at": null
+    },
+    {
+      "id": "P04",
+      "original_label": "Без подписи",
+      "from_node": "UDR_J03",
+      "to_node": "UDR_J04",
+      "role": "internal_connector",
+      "line_class": "трубопровод без ВНП (чёрная линия по легенде)",
+      "active_state": "unknown",
+      "parameters": {
+        "length_m": null,
+        "outer_diameter_mm": null,
+        "wall_thickness_mm": null,
+        "inner_diameter_mm": null
+      },
+      "schematic_path": [
+        [
+          161.28,
+          1316.16
+        ],
+        [
+          203.04,
+          1316.16
+        ]
+      ],
+      "source_refs": [
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            159.28,
+            1314.16,
+            205.04,
+            1318.16
+          ],
+          "raw_text": "Непрерывный наблюдаемый участок деталировки УДР; собственного обозначения нет",
+          "method": "visual",
+          "fields": [
+            "from_node",
+            "to_node",
+            "role",
+            "line_class"
+          ]
+        },
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            159.28,
+            1314.16,
+            205.04,
+            1318.16
+          ],
+          "raw_text": "ID назначен разметчиком, а не взят с исходной схемы",
+          "method": "derived",
+          "fields": [
+            "original_label"
+          ]
+        }
+      ],
+      "review_status": "pending",
+      "reviewed_by": null,
+      "reviewed_at": null
+    },
+    {
+      "id": "P05",
+      "original_label": "Без подписи",
+      "from_node": "UDR_J04",
+      "to_node": "UDR_J05",
+      "role": "internal_connector",
+      "line_class": "трубопровод без ВНП (чёрная линия по легенде)",
+      "active_state": "unknown",
+      "parameters": {
+        "length_m": null,
+        "outer_diameter_mm": null,
+        "wall_thickness_mm": null,
+        "inner_diameter_mm": null
+      },
+      "schematic_path": [
+        [
+          203.04,
+          1316.16
+        ],
+        [
+          240.0,
+          1316.16
+        ]
+      ],
+      "source_refs": [
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            201.04,
+            1314.16,
+            242.0,
+            1318.16
+          ],
+          "raw_text": "Непрерывный наблюдаемый участок деталировки УДР; собственного обозначения нет",
+          "method": "visual",
+          "fields": [
+            "from_node",
+            "to_node",
+            "role",
+            "line_class"
+          ]
+        },
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            201.04,
+            1314.16,
+            242.0,
+            1318.16
+          ],
+          "raw_text": "ID назначен разметчиком, а не взят с исходной схемы",
+          "method": "derived",
+          "fields": [
+            "original_label"
+          ]
+        }
+      ],
+      "review_status": "pending",
+      "reviewed_by": null,
+      "reviewed_at": null
+    },
+    {
+      "id": "P06",
+      "original_label": "Без подписи",
+      "from_node": "UDR_J05",
+      "to_node": "UDR_J06",
+      "role": "internal_connector",
+      "line_class": "трубопровод без ВНП (чёрная линия по легенде)",
+      "active_state": "unknown",
+      "parameters": {
+        "length_m": null,
+        "outer_diameter_mm": null,
+        "wall_thickness_mm": null,
+        "inner_diameter_mm": null
+      },
+      "schematic_path": [
+        [
+          240.0,
+          1316.16
+        ],
+        [
+          259.44,
+          1316.16
+        ]
+      ],
+      "source_refs": [
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            238.0,
+            1314.16,
+            261.44,
+            1318.16
+          ],
+          "raw_text": "Непрерывный наблюдаемый участок деталировки УДР; собственного обозначения нет",
+          "method": "visual",
+          "fields": [
+            "from_node",
+            "to_node",
+            "role",
+            "line_class"
+          ]
+        },
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            238.0,
+            1314.16,
+            261.44,
+            1318.16
+          ],
+          "raw_text": "ID назначен разметчиком, а не взят с исходной схемы",
+          "method": "derived",
+          "fields": [
+            "original_label"
+          ]
+        }
+      ],
+      "review_status": "pending",
+      "reviewed_by": null,
+      "reviewed_at": null
+    },
+    {
+      "id": "P07",
+      "original_label": "Без подписи",
+      "from_node": "UDR_J06",
+      "to_node": "UDR_J07",
+      "role": "internal_connector",
+      "line_class": "трубопровод без ВНП (чёрная линия по легенде)",
+      "active_state": "unknown",
+      "parameters": {
+        "length_m": null,
+        "outer_diameter_mm": null,
+        "wall_thickness_mm": null,
+        "inner_diameter_mm": null
+      },
+      "schematic_path": [
+        [
+          259.44,
+          1316.16
+        ],
+        [
+          272.4,
+          1316.16
+        ]
+      ],
+      "source_refs": [
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            257.44,
+            1314.16,
+            274.4,
+            1318.16
+          ],
+          "raw_text": "Непрерывный наблюдаемый участок деталировки УДР; собственного обозначения нет",
+          "method": "visual",
+          "fields": [
+            "from_node",
+            "to_node",
+            "role",
+            "line_class"
+          ]
+        },
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            257.44,
+            1314.16,
+            274.4,
+            1318.16
+          ],
+          "raw_text": "ID назначен разметчиком, а не взят с исходной схемы",
+          "method": "derived",
+          "fields": [
+            "original_label"
+          ]
+        }
+      ],
+      "review_status": "pending",
+      "reviewed_by": null,
+      "reviewed_at": null
+    },
+    {
+      "id": "P08",
+      "original_label": "Без подписи",
+      "from_node": "BD_K417",
+      "to_node": "UDR_J01",
+      "role": "internal_connector",
+      "line_class": "трубопровод без ВНП (чёрная линия по легенде)",
+      "active_state": "unknown",
+      "parameters": {
+        "length_m": null,
+        "outer_diameter_mm": null,
+        "wall_thickness_mm": null,
+        "inner_diameter_mm": null
+      },
+      "schematic_path": [
+        [
+          69.6,
+          1392
+        ],
+        [
+          103.44,
+          1392
+        ],
+        [
+          103.44,
+          1316.16
+        ]
+      ],
+      "source_refs": [
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            67.6,
+            1314.16,
+            105.44,
+            1394
+          ],
+          "raw_text": "Непрерывный наблюдаемый участок деталировки УДР; собственного обозначения нет",
+          "method": "visual",
+          "fields": [
+            "from_node",
+            "to_node",
+            "role",
+            "line_class"
+          ]
+        },
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            67.6,
+            1314.16,
+            105.44,
+            1394
+          ],
+          "raw_text": "ID назначен разметчиком, а не взят с исходной схемы",
+          "method": "derived",
+          "fields": [
+            "original_label"
+          ]
+        }
+      ],
+      "review_status": "pending",
+      "reviewed_by": null,
+      "reviewed_at": null
+    },
+    {
+      "id": "P09",
+      "original_label": "Без подписи",
+      "from_node": "BD_K426",
+      "to_node": "UDR_J02",
+      "role": "internal_connector",
+      "line_class": "трубопровод без ВНП (чёрная линия по легенде)",
+      "active_state": "unknown",
+      "parameters": {
+        "length_m": null,
+        "outer_diameter_mm": null,
+        "wall_thickness_mm": null,
+        "inner_diameter_mm": null
+      },
+      "schematic_path": [
+        [
+          110.4,
+          1256.4
+        ],
+        [
+          110.4,
+          1316.16
+        ]
+      ],
+      "source_refs": [
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            108.4,
+            1254.4,
+            112.4,
+            1318.16
+          ],
+          "raw_text": "Непрерывный наблюдаемый участок деталировки УДР; собственного обозначения нет",
+          "method": "visual",
+          "fields": [
+            "from_node",
+            "to_node",
+            "role",
+            "line_class"
+          ]
+        },
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            108.4,
+            1254.4,
+            112.4,
+            1318.16
+          ],
+          "raw_text": "ID назначен разметчиком, а не взят с исходной схемы",
+          "method": "derived",
+          "fields": [
+            "original_label"
+          ]
+        }
+      ],
+      "review_status": "pending",
+      "reviewed_by": null,
+      "reviewed_at": null
+    },
+    {
+      "id": "P10",
+      "original_label": "Без подписи",
+      "from_node": "SRC_K328",
+      "to_node": "UDR_J06",
+      "role": "internal_connector",
+      "line_class": "трубопровод без ВНП (чёрная линия по легенде)",
+      "active_state": "unknown",
+      "parameters": {
+        "length_m": null,
+        "outer_diameter_mm": null,
+        "wall_thickness_mm": null,
+        "inner_diameter_mm": null
+      },
+      "schematic_path": [
+        [
+          259.44,
+          1263.36
+        ],
+        [
+          259.44,
+          1316.16
+        ]
+      ],
+      "source_refs": [
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            257.44,
+            1261.36,
+            261.44,
+            1318.16
+          ],
+          "raw_text": "Непрерывный наблюдаемый участок деталировки УДР; собственного обозначения нет",
+          "method": "visual",
+          "fields": [
+            "from_node",
+            "to_node",
+            "role",
+            "line_class"
+          ]
+        },
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            257.44,
+            1261.36,
+            261.44,
+            1318.16
+          ],
+          "raw_text": "ID назначен разметчиком, а не взят с исходной схемы",
+          "method": "derived",
+          "fields": [
+            "original_label"
+          ]
+        }
+      ],
+      "review_status": "pending",
+      "reviewed_by": null,
+      "reviewed_at": null
+    },
+    {
+      "id": "P11",
+      "original_label": "Без подписи",
+      "from_node": "SRC_K331_AGZU1",
+      "to_node": "UDR_J10",
+      "role": "internal_connector",
+      "line_class": "трубопровод без ВНП (чёрная линия по легенде)",
+      "active_state": "unknown",
+      "parameters": {
+        "length_m": null,
+        "outer_diameter_mm": null,
+        "wall_thickness_mm": null,
+        "inner_diameter_mm": null
+      },
+      "schematic_path": [
+        [
+          406.56,
+          1341.6
+        ],
+        [
+          291.6,
+          1341.6
+        ],
+        [
+          291.6,
+          1353.12
+        ],
+        [
+          272.4,
+          1353.12
+        ]
+      ],
+      "source_refs": [
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            270.4,
+            1339.6,
+            408.56,
+            1355.12
+          ],
+          "raw_text": "Непрерывный наблюдаемый участок деталировки УДР; собственного обозначения нет",
+          "method": "visual",
+          "fields": [
+            "from_node",
+            "to_node",
+            "role",
+            "line_class"
+          ]
+        },
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            270.4,
+            1339.6,
+            408.56,
+            1355.12
+          ],
+          "raw_text": "ID назначен разметчиком, а не взят с исходной схемы",
+          "method": "derived",
+          "fields": [
+            "original_label"
+          ]
+        }
+      ],
+      "review_status": "pending",
+      "reviewed_by": null,
+      "reviewed_at": null
+    },
+    {
+      "id": "P12",
+      "original_label": "Без подписи",
+      "from_node": "BD_R543",
+      "to_node": "UDR_J09",
+      "role": "internal_connector",
+      "line_class": "трубопровод без ВНП (чёрная линия по легенде)",
+      "active_state": "unknown",
+      "parameters": {
+        "length_m": null,
+        "outer_diameter_mm": null,
+        "wall_thickness_mm": null,
+        "inner_diameter_mm": null
+      },
+      "schematic_path": [
+        [
+          406.56,
+          1380.0
+        ],
+        [
+          240.0,
+          1380.0
+        ]
+      ],
+      "source_refs": [
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            238.0,
+            1378.0,
+            408.56,
+            1382.0
+          ],
+          "raw_text": "Непрерывный наблюдаемый участок деталировки УДР; собственного обозначения нет",
+          "method": "visual",
+          "fields": [
+            "from_node",
+            "to_node",
+            "role",
+            "line_class"
+          ]
+        },
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            238.0,
+            1378.0,
+            408.56,
+            1382.0
+          ],
+          "raw_text": "ID назначен разметчиком, а не взят с исходной схемы",
+          "method": "derived",
+          "fields": [
+            "original_label"
+          ]
+        }
+      ],
+      "review_status": "pending",
+      "reviewed_by": null,
+      "reviewed_at": null
+    },
+    {
+      "id": "P13",
+      "original_label": "Без подписи",
+      "from_node": "BD_K340_K335",
+      "to_node": "UDR_J08",
+      "role": "internal_connector",
+      "line_class": "трубопровод без ВНП (чёрная линия по легенде)",
+      "active_state": "unknown",
+      "parameters": {
+        "length_m": null,
+        "outer_diameter_mm": null,
+        "wall_thickness_mm": null,
+        "inner_diameter_mm": null
+      },
+      "schematic_path": [
+        [
+          68.64,
+          1408.56
+        ],
+        [
+          161.28,
+          1408.56
+        ]
+      ],
+      "source_refs": [
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            66.64,
+            1406.56,
+            163.28,
+            1410.56
+          ],
+          "raw_text": "Непрерывный наблюдаемый участок деталировки УДР; собственного обозначения нет",
+          "method": "visual",
+          "fields": [
+            "from_node",
+            "to_node",
+            "role",
+            "line_class"
+          ]
+        },
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            66.64,
+            1406.56,
+            163.28,
+            1410.56
+          ],
+          "raw_text": "ID назначен разметчиком, а не взят с исходной схемы",
+          "method": "derived",
+          "fields": [
+            "original_label"
+          ]
+        }
+      ],
+      "review_status": "pending",
+      "reviewed_by": null,
+      "reviewed_at": null
+    },
+    {
+      "id": "P14",
+      "original_label": "Без подписи",
+      "from_node": "UDR_J03",
+      "to_node": "UDR_J08",
+      "role": "internal_connector",
+      "line_class": "трубопровод без ВНП (чёрная линия по легенде)",
+      "active_state": "unknown",
+      "parameters": {
+        "length_m": null,
+        "outer_diameter_mm": null,
+        "wall_thickness_mm": null,
+        "inner_diameter_mm": null
+      },
+      "schematic_path": [
+        [
+          161.28,
+          1316.16
+        ],
+        [
+          161.28,
+          1408.56
+        ]
+      ],
+      "source_refs": [
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            159.28,
+            1314.16,
+            163.28,
+            1410.56
+          ],
+          "raw_text": "Непрерывный наблюдаемый участок деталировки УДР; собственного обозначения нет",
+          "method": "visual",
+          "fields": [
+            "from_node",
+            "to_node",
+            "role",
+            "line_class"
+          ]
+        },
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            159.28,
+            1314.16,
+            163.28,
+            1410.56
+          ],
+          "raw_text": "ID назначен разметчиком, а не взят с исходной схемы",
+          "method": "derived",
+          "fields": [
+            "original_label"
+          ]
+        }
+      ],
+      "review_status": "pending",
+      "reviewed_by": null,
+      "reviewed_at": null
+    },
+    {
+      "id": "P15",
+      "original_label": "Без подписи",
+      "from_node": "UDR_J05",
+      "to_node": "UDR_J09",
+      "role": "internal_connector",
+      "line_class": "трубопровод без ВНП (чёрная линия по легенде)",
+      "active_state": "unknown",
+      "parameters": {
+        "length_m": null,
+        "outer_diameter_mm": null,
+        "wall_thickness_mm": null,
+        "inner_diameter_mm": null
+      },
+      "schematic_path": [
+        [
+          240.0,
+          1316.16
+        ],
+        [
+          240.0,
+          1380.0
+        ]
+      ],
+      "source_refs": [
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            238.0,
+            1314.16,
+            242.0,
+            1382.0
+          ],
+          "raw_text": "Непрерывный наблюдаемый участок деталировки УДР; собственного обозначения нет",
+          "method": "visual",
+          "fields": [
+            "from_node",
+            "to_node",
+            "role",
+            "line_class"
+          ]
+        },
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            238.0,
+            1314.16,
+            242.0,
+            1382.0
+          ],
+          "raw_text": "ID назначен разметчиком, а не взят с исходной схемы",
+          "method": "derived",
+          "fields": [
+            "original_label"
+          ]
+        }
+      ],
+      "review_status": "pending",
+      "reviewed_by": null,
+      "reviewed_at": null
+    },
+    {
+      "id": "P16",
+      "original_label": "Без подписи",
+      "from_node": "UDR_J07",
+      "to_node": "UDR_J10",
+      "role": "internal_connector",
+      "line_class": "трубопровод без ВНП (чёрная линия по легенде)",
+      "active_state": "unknown",
+      "parameters": {
+        "length_m": null,
+        "outer_diameter_mm": null,
+        "wall_thickness_mm": null,
+        "inner_diameter_mm": null
+      },
+      "schematic_path": [
+        [
+          272.4,
+          1316.16
+        ],
+        [
+          272.4,
+          1353.12
+        ]
+      ],
+      "source_refs": [
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            270.4,
+            1314.16,
+            274.4,
+            1355.12
+          ],
+          "raw_text": "Непрерывный наблюдаемый участок деталировки УДР; собственного обозначения нет",
+          "method": "visual",
+          "fields": [
+            "from_node",
+            "to_node",
+            "role",
+            "line_class"
+          ]
+        },
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            270.4,
+            1314.16,
+            274.4,
+            1355.12
+          ],
+          "raw_text": "ID назначен разметчиком, а не взят с исходной схемы",
+          "method": "derived",
+          "fields": [
+            "original_label"
+          ]
+        }
+      ],
+      "review_status": "pending",
+      "reviewed_by": null,
+      "reviewed_at": null
+    },
+    {
+      "id": "P17",
+      "original_label": "Без подписи",
+      "from_node": "UDR_J08",
+      "to_node": "BD_LOWER_16",
+      "role": "internal_connector",
+      "line_class": "трубопровод без ВНП (чёрная линия по легенде)",
+      "active_state": "unknown",
+      "parameters": {
+        "length_m": null,
+        "outer_diameter_mm": null,
+        "wall_thickness_mm": null,
+        "inner_diameter_mm": null
+      },
+      "schematic_path": [
+        [
+          161.28,
+          1408.56
+        ],
+        [
+          161.28,
+          1421.76
+        ]
+      ],
+      "source_refs": [
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            159.28,
+            1406.56,
+            163.28,
+            1423.76
+          ],
+          "raw_text": "Непрерывный наблюдаемый участок деталировки УДР; собственного обозначения нет",
+          "method": "visual",
+          "fields": [
+            "from_node",
+            "to_node",
+            "role",
+            "line_class"
+          ]
+        },
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            159.28,
+            1406.56,
+            163.28,
+            1423.76
+          ],
+          "raw_text": "ID назначен разметчиком, а не взят с исходной схемы",
+          "method": "derived",
+          "fields": [
+            "original_label"
+          ]
+        }
+      ],
+      "review_status": "pending",
+      "reviewed_by": null,
+      "reviewed_at": null
+    },
+    {
+      "id": "P18",
+      "original_label": "Без подписи",
+      "from_node": "UDR_J09",
+      "to_node": "BD_LOWER_18",
+      "role": "internal_connector",
+      "line_class": "трубопровод без ВНП (чёрная линия по легенде)",
+      "active_state": "unknown",
+      "parameters": {
+        "length_m": null,
+        "outer_diameter_mm": null,
+        "wall_thickness_mm": null,
+        "inner_diameter_mm": null
+      },
+      "schematic_path": [
+        [
+          240.0,
+          1380.0
+        ],
+        [
+          240.0,
+          1421.76
+        ]
+      ],
+      "source_refs": [
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            238.0,
+            1378.0,
+            242.0,
+            1423.76
+          ],
+          "raw_text": "Непрерывный наблюдаемый участок деталировки УДР; собственного обозначения нет",
+          "method": "visual",
+          "fields": [
+            "from_node",
+            "to_node",
+            "role",
+            "line_class"
+          ]
+        },
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            238.0,
+            1378.0,
+            242.0,
+            1423.76
+          ],
+          "raw_text": "ID назначен разметчиком, а не взят с исходной схемы",
+          "method": "derived",
+          "fields": [
+            "original_label"
+          ]
+        }
+      ],
+      "review_status": "pending",
+      "reviewed_by": null,
+      "reviewed_at": null
+    },
+    {
+      "id": "P19",
+      "original_label": "Без подписи",
+      "from_node": "UDR_J10",
+      "to_node": "BD_LOWER_19",
+      "role": "internal_connector",
+      "line_class": "трубопровод без ВНП (чёрная линия по легенде)",
+      "active_state": "unknown",
+      "parameters": {
+        "length_m": null,
+        "outer_diameter_mm": null,
+        "wall_thickness_mm": null,
+        "inner_diameter_mm": null
+      },
+      "schematic_path": [
+        [
+          272.4,
+          1353.12
+        ],
+        [
+          272.4,
+          1421.76
+        ]
+      ],
+      "source_refs": [
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            270.4,
+            1351.12,
+            274.4,
+            1423.76
+          ],
+          "raw_text": "Непрерывный наблюдаемый участок деталировки УДР; собственного обозначения нет",
+          "method": "visual",
+          "fields": [
+            "from_node",
+            "to_node",
+            "role",
+            "line_class"
+          ]
+        },
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            270.4,
+            1351.12,
+            274.4,
+            1423.76
+          ],
+          "raw_text": "ID назначен разметчиком, а не взят с исходной схемы",
+          "method": "derived",
+          "fields": [
+            "original_label"
+          ]
+        }
+      ],
+      "review_status": "pending",
+      "reviewed_by": null,
+      "reviewed_at": null
+    },
+    {
+      "id": "P20",
+      "original_label": "Без подписи",
+      "from_node": "UDR_J04",
+      "to_node": "BD_V06_END",
+      "role": "internal_connector",
+      "line_class": "трубопровод без ВНП (чёрная линия по легенде)",
+      "active_state": "unknown",
+      "parameters": {
+        "length_m": null,
+        "outer_diameter_mm": null,
+        "wall_thickness_mm": null,
+        "inner_diameter_mm": null
+      },
+      "schematic_path": [
+        [
+          203.04,
+          1316.16
+        ],
+        [
+          203.04,
+          1348.32
+        ]
+      ],
+      "source_refs": [
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            201.04,
+            1314.16,
+            205.04,
+            1350.32
+          ],
+          "raw_text": "Непрерывный наблюдаемый участок деталировки УДР; собственного обозначения нет",
+          "method": "visual",
+          "fields": [
+            "from_node",
+            "to_node",
+            "role",
+            "line_class"
+          ]
+        },
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            201.04,
+            1314.16,
+            205.04,
+            1350.32
+          ],
+          "raw_text": "ID назначен разметчиком, а не взят с исходной схемы",
+          "method": "derived",
+          "fields": [
+            "original_label"
+          ]
+        }
+      ],
+      "review_status": "pending",
+      "reviewed_by": null,
+      "reviewed_at": null
+    }
+  ],
+  "valves": [
+    {
+      "id": "UDR_V01",
+      "original_label": "№ 1 200х25",
+      "pipe_id": "P03",
+      "physical_state": "open",
+      "size_dn_mm": 200,
+      "pressure_rating_raw": "25",
+      "source_refs": [
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            116,
+            1302,
+            147,
+            1325
+          ],
+          "raw_text": "№ 1 200х25; прозрачный символ",
+          "method": "visual",
+          "fields": [
+            "original_label",
+            "physical_state",
+            "size_dn_mm",
+            "pressure_rating_raw"
+          ]
+        },
+        {
+          "source_id": "scheme_readme",
+          "line_start": 4,
+          "line_end": 4,
+          "raw_text": "Степень открытия клапанов (прозрачный клапан - полностью открыт, закрашенный - полностью закрыт)",
+          "method": "text_file",
+          "fields": [
+            "physical_state"
+          ]
+        }
+      ],
+      "review_status": "pending",
+      "reviewed_by": null,
+      "reviewed_at": null
+    },
+    {
+      "id": "UDR_V02",
+      "original_label": "№ 2 250х16",
+      "pipe_id": "P08",
+      "physical_state": "open",
+      "size_dn_mm": 250,
+      "pressure_rating_raw": "16",
+      "source_refs": [
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            88,
+            1342,
+            137,
+            1367
+          ],
+          "raw_text": "№ 2 250х16; прозрачный символ",
+          "method": "visual",
+          "fields": [
+            "original_label",
+            "physical_state",
+            "size_dn_mm",
+            "pressure_rating_raw"
+          ]
+        },
+        {
+          "source_id": "scheme_readme",
+          "line_start": 4,
+          "line_end": 4,
+          "raw_text": "Степень открытия клапанов (прозрачный клапан - полностью открыт, закрашенный - полностью закрыт)",
+          "method": "text_file",
+          "fields": [
+            "physical_state"
+          ]
+        }
+      ],
+      "review_status": "pending",
+      "reviewed_by": null,
+      "reviewed_at": null
+    },
+    {
+      "id": "UDR_V03",
+      "original_label": "№ 3 150х16",
+      "pipe_id": "P10",
+      "physical_state": "open",
+      "size_dn_mm": 150,
+      "pressure_rating_raw": "16",
+      "source_refs": [
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            222,
+            1293,
+            275,
+            1314
+          ],
+          "raw_text": "№ 3 150х16; прозрачный символ",
+          "method": "visual",
+          "fields": [
+            "original_label",
+            "physical_state",
+            "size_dn_mm",
+            "pressure_rating_raw"
+          ]
+        },
+        {
+          "source_id": "scheme_readme",
+          "line_start": 4,
+          "line_end": 4,
+          "raw_text": "Степень открытия клапанов (прозрачный клапан - полностью открыт, закрашенный - полностью закрыт)",
+          "method": "text_file",
+          "fields": [
+            "physical_state"
+          ]
+        }
+      ],
+      "review_status": "pending",
+      "reviewed_by": null,
+      "reviewed_at": null
+    },
+    {
+      "id": "UDR_V05",
+      "original_label": "№ 5 100х40",
+      "pipe_id": "P14",
+      "physical_state": "closed",
+      "size_dn_mm": 100,
+      "pressure_rating_raw": "40",
+      "source_refs": [
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            134,
+            1323,
+            181,
+            1353
+          ],
+          "raw_text": "№ 5 100х40; закрашенный символ",
+          "method": "visual",
+          "fields": [
+            "original_label",
+            "physical_state",
+            "size_dn_mm",
+            "pressure_rating_raw"
+          ]
+        },
+        {
+          "source_id": "scheme_readme",
+          "line_start": 4,
+          "line_end": 4,
+          "raw_text": "Степень открытия клапанов (прозрачный клапан - полностью открыт, закрашенный - полностью закрыт)",
+          "method": "text_file",
+          "fields": [
+            "physical_state"
+          ]
+        }
+      ],
+      "review_status": "pending",
+      "reviewed_by": null,
+      "reviewed_at": null
+    },
+    {
+      "id": "UDR_V06",
+      "original_label": "№ 6 100х40",
+      "pipe_id": "P20",
+      "physical_state": "closed",
+      "size_dn_mm": 100,
+      "pressure_rating_raw": "40",
+      "source_refs": [
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            172,
+            1324,
+            219,
+            1350
+          ],
+          "raw_text": "№ 6 100х40; закрашенный символ",
+          "method": "visual",
+          "fields": [
+            "original_label",
+            "physical_state",
+            "size_dn_mm",
+            "pressure_rating_raw"
+          ]
+        },
+        {
+          "source_id": "scheme_readme",
+          "line_start": 4,
+          "line_end": 4,
+          "raw_text": "Степень открытия клапанов (прозрачный клапан - полностью открыт, закрашенный - полностью закрыт)",
+          "method": "text_file",
+          "fields": [
+            "physical_state"
+          ]
+        }
+      ],
+      "review_status": "pending",
+      "reviewed_by": null,
+      "reviewed_at": null
+    },
+    {
+      "id": "UDR_V07",
+      "original_label": "№ 7 150х64",
+      "pipe_id": "P15",
+      "physical_state": "open",
+      "size_dn_mm": 150,
+      "pressure_rating_raw": "64",
+      "source_refs": [
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            217,
+            1324,
+            258,
+            1352
+          ],
+          "raw_text": "№ 7 150х64; прозрачный символ",
+          "method": "visual",
+          "fields": [
+            "original_label",
+            "physical_state",
+            "size_dn_mm",
+            "pressure_rating_raw"
+          ]
+        },
+        {
+          "source_id": "scheme_readme",
+          "line_start": 4,
+          "line_end": 4,
+          "raw_text": "Степень открытия клапанов (прозрачный клапан - полностью открыт, закрашенный - полностью закрыт)",
+          "method": "text_file",
+          "fields": [
+            "physical_state"
+          ]
+        }
+      ],
+      "review_status": "pending",
+      "reviewed_by": null,
+      "reviewed_at": null
+    },
+    {
+      "id": "UDR_V08",
+      "original_label": "№ 8 100х40",
+      "pipe_id": "P16",
+      "physical_state": "open",
+      "size_dn_mm": 100,
+      "pressure_rating_raw": "40",
+      "source_refs": [
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            251,
+            1324,
+            291,
+            1353
+          ],
+          "raw_text": "№ 8 100х40; прозрачный символ",
+          "method": "visual",
+          "fields": [
+            "original_label",
+            "physical_state",
+            "size_dn_mm",
+            "pressure_rating_raw"
+          ]
+        },
+        {
+          "source_id": "scheme_readme",
+          "line_start": 4,
+          "line_end": 4,
+          "raw_text": "Степень открытия клапанов (прозрачный клапан - полностью открыт, закрашенный - полностью закрыт)",
+          "method": "text_file",
+          "fields": [
+            "physical_state"
+          ]
+        }
+      ],
+      "review_status": "pending",
+      "reviewed_by": null,
+      "reviewed_at": null
+    },
+    {
+      "id": "UDR_V09",
+      "original_label": "№ 9 100х40",
+      "pipe_id": "P11",
+      "physical_state": "open",
+      "size_dn_mm": 100,
+      "pressure_rating_raw": "40",
+      "source_refs": [
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            295,
+            1325,
+            344,
+            1351
+          ],
+          "raw_text": "№ 9 100х40; прозрачный символ",
+          "method": "visual",
+          "fields": [
+            "original_label",
+            "physical_state",
+            "size_dn_mm",
+            "pressure_rating_raw"
+          ]
+        },
+        {
+          "source_id": "scheme_readme",
+          "line_start": 4,
+          "line_end": 4,
+          "raw_text": "Степень открытия клапанов (прозрачный клапан - полностью открыт, закрашенный - полностью закрыт)",
+          "method": "text_file",
+          "fields": [
+            "physical_state"
+          ]
+        }
+      ],
+      "review_status": "pending",
+      "reviewed_by": null,
+      "reviewed_at": null
+    },
+    {
+      "id": "UDR_V10",
+      "original_label": "№ 10 150х16",
+      "pipe_id": "P09",
+      "physical_state": "open",
+      "size_dn_mm": 150,
+      "pressure_rating_raw": "16",
+      "source_refs": [
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            77,
+            1285,
+            124,
+            1310
+          ],
+          "raw_text": "№ 10 150х16; прозрачный символ",
+          "method": "visual",
+          "fields": [
+            "original_label",
+            "physical_state",
+            "size_dn_mm",
+            "pressure_rating_raw"
+          ]
+        },
+        {
+          "source_id": "scheme_readme",
+          "line_start": 4,
+          "line_end": 4,
+          "raw_text": "Степень открытия клапанов (прозрачный клапан - полностью открыт, закрашенный - полностью закрыт)",
+          "method": "text_file",
+          "fields": [
+            "physical_state"
+          ]
+        }
+      ],
+      "review_status": "pending",
+      "reviewed_by": null,
+      "reviewed_at": null
+    },
+    {
+      "id": "UDR_V11",
+      "original_label": "№ 11 200х25",
+      "pipe_id": "P12",
+      "physical_state": "open",
+      "size_dn_mm": 200,
+      "pressure_rating_raw": "25",
+      "source_refs": [
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            282,
+            1370,
+            344,
+            1386
+          ],
+          "raw_text": "№ 11 200х25; прозрачный символ",
+          "method": "visual",
+          "fields": [
+            "original_label",
+            "physical_state",
+            "size_dn_mm",
+            "pressure_rating_raw"
+          ]
+        },
+        {
+          "source_id": "scheme_readme",
+          "line_start": 4,
+          "line_end": 4,
+          "raw_text": "Степень открытия клапанов (прозрачный клапан - полностью открыт, закрашенный - полностью закрыт)",
+          "method": "text_file",
+          "fields": [
+            "physical_state"
+          ]
+        }
+      ],
+      "review_status": "pending",
+      "reviewed_by": null,
+      "reviewed_at": null
+    },
+    {
+      "id": "UDR_V14",
+      "original_label": "№ 14 100х40",
+      "pipe_id": "P13",
+      "physical_state": "closed",
+      "size_dn_mm": 100,
+      "pressure_rating_raw": "40",
+      "source_refs": [
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            113,
+            1390,
+            151,
+            1424
+          ],
+          "raw_text": "№ 14 100х40; закрашенный символ",
+          "method": "visual",
+          "fields": [
+            "original_label",
+            "physical_state",
+            "size_dn_mm",
+            "pressure_rating_raw"
+          ]
+        },
+        {
+          "source_id": "scheme_readme",
+          "line_start": 4,
+          "line_end": 4,
+          "raw_text": "Степень открытия клапанов (прозрачный клапан - полностью открыт, закрашенный - полностью закрыт)",
+          "method": "text_file",
+          "fields": [
+            "physical_state"
+          ]
+        }
+      ],
+      "review_status": "pending",
+      "reviewed_by": null,
+      "reviewed_at": null
+    }
+  ],
+  "ambiguities": [
+    {
+      "id": "A_MINIMA",
+      "kind": "detail_mapping",
+      "description": "21 узел/порт и 20 ветвей посчитаны внутри деталировки УДР. Внутренние точки не являются 10 отдельными подписанными УЗ№. Преподаватель должен подтвердить допустимость такого фрагмента и такого подсчёта учебных минимумов.",
+      "status": "open",
+      "affected_ids": [
+        "UDR_UPPER_CANDIDATE"
+      ],
+      "source_refs": [
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            45,
+            1250,
+            470,
+            1466
+          ],
+          "raw_text": "Схема УДР: внутренние разветвления и граничные порты",
+          "method": "derived",
+          "fields": [
+            "required_minima"
+          ]
+        }
+      ],
+      "resolution": null,
+      "reviewed_by": null,
+      "reviewed_at": null
+    },
+    {
+      "id": "A_DETAIL_MAPPING",
+      "kind": "detail_mapping",
+      "description": "Нужно подтвердить соответствие портов деталировки УДР основному виду. К-331 имеет подписи 330 м (2003) и 130 м (2022); их нельзя автоматически считать дублями или параллельными трубами. Длины внешних трасс не присвоены внутренним отрезкам деталировки.",
+      "status": "open",
+      "affected_ids": [
+        "UDR_UPPER_CANDIDATE",
+        "SRC_K328",
+        "SRC_K331_AGZU1",
+        "BD_K426",
+        "BD_K340_K335"
+      ],
+      "source_refs": [
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            275,
+            1010,
+            642,
+            1243
+          ],
+          "raw_text": "Основной вид: К-328, К-331, УДР и подходящие линии",
+          "method": "visual",
+          "fields": [
+            "context"
+          ]
+        },
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            45,
+            1250,
+            470,
+            1466
+          ],
+          "raw_text": "Схема УДР",
+          "method": "visual",
+          "fields": [
+            "context"
+          ]
+        }
+      ],
+      "resolution": null,
+      "reviewed_by": null,
+      "reviewed_at": null
+    },
+    {
+      "id": "A_MISSING_GEOMETRY",
+      "kind": "missing_parameter",
+      "description": "Все 20 внутренних отрезков имеют неизвестные длины и пока нераспределённые диаметры/толщины. Надписи 219х8 и 114х8 относятся к группам линий; распространение по каждому отрезку требует согласования. Ни длины из координат, ни нули, ни типовые значения не подставлены. Внутренний диаметр тоже null.",
+      "status": "open",
+      "affected_ids": [
+        "P01",
+        "P02",
+        "P03",
+        "P04",
+        "P05",
+        "P06",
+        "P07",
+        "P08",
+        "P09",
+        "P10",
+        "P11",
+        "P12",
+        "P13",
+        "P14",
+        "P15",
+        "P16",
+        "P17",
+        "P18",
+        "P19",
+        "P20"
+      ],
+      "source_refs": [
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            66,
+            1303,
+            302,
+            1466
+          ],
+          "raw_text": "219х8; 114х8; без длин отдельных внутренних отрезков",
+          "method": "visual",
+          "fields": [
+            "parameters"
+          ]
+        }
+      ],
+      "resolution": null,
+      "reviewed_by": null,
+      "reviewed_at": null
+    },
+    {
+      "id": "A_CROSSING_R543",
+      "kind": "crossing",
+      "description": "Наблюдаемый мостик Р-543 через вертикаль К-331 трактуется как отсутствие соединения. P12 пересекает P19, отдельного общего узла нет. Требуется подтверждение трактовки.",
+      "status": "open",
+      "affected_ids": [
+        "P12",
+        "P19"
+      ],
+      "source_refs": [
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            267,
+            1373,
+            278,
+            1387
+          ],
+          "raw_text": "Мостик в пересечении линии Р-543 и вертикальной линии К-331",
+          "method": "visual",
+          "fields": [
+            "from_node",
+            "to_node"
+          ]
+        }
+      ],
+      "resolution": null,
+      "reviewed_by": null,
+      "reviewed_at": null
+    },
+    {
+      "id": "A_GAP_V06_V17",
+      "kind": "connection",
+      "description": "Между №6 и №17 виден белый разрыв. В графе сохранён только видимый конец после №6, а связь с №17 и нижний участок не добавлены. Требуется пояснение, является ли разрыв физическим либо дефектом изображения.",
+      "status": "open",
+      "affected_ids": [
+        "UDR_UPPER_CANDIDATE",
+        "BD_V06_END",
+        "P20",
+        "UDR_V06"
+      ],
+      "source_refs": [
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            197,
+            1347,
+            209,
+            1425
+          ],
+          "raw_text": "Отсутствующая линия между символами №6 и №17",
+          "method": "visual",
+          "fields": [
+            "from_node",
+            "to_node"
+          ]
+        }
+      ],
+      "resolution": null,
+      "reviewed_by": null,
+      "reviewed_at": null
+    },
+    {
+      "id": "A_LOWER_SCOPE",
+      "kind": "connection",
+      "description": "Условные границы поставлены перед №16/18/19. Боковая закрытая ветвь №23 100х40 на вертикали №7/18 не имеет прослеживаемого второго конца и исключена из связного графа. Нижний коллектор, №15, газовая ветвь и выход к ДНУ исключены. Нужно утвердить границы.",
+      "status": "open",
+      "affected_ids": [
+        "UDR_UPPER_CANDIDATE",
+        "BD_LOWER_16",
+        "BD_LOWER_18",
+        "BD_LOWER_19"
+      ],
+      "source_refs": [
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            193,
+            1393,
+            243,
+            1415
+          ],
+          "raw_text": "№23 100х40: один видимый присоединённый конец",
+          "method": "visual",
+          "fields": [
+            "scope"
+          ]
+        },
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            152,
+            1418,
+            279,
+            1465
+          ],
+          "raw_text": "№16/18/19 и нижний коллектор за границей кандидата",
+          "method": "visual",
+          "fields": [
+            "scope"
+          ]
+        }
+      ],
+      "resolution": null,
+      "reviewed_by": null,
+      "reviewed_at": null
+    },
+    {
+      "id": "A_LINE_DATE",
+      "kind": "line_status",
+      "description": "Название схемы относится к 2025 году, в основном виде имеются исторические отметки 2022—2024. Для внутренних отрезков не определён отдельный рабочий статус на согласованную дату; active_state=unknown. Цвет означает класс трубопровода, а не доказанный текущий рабочий статус.",
+      "status": "open",
+      "affected_ids": [
+        "P01",
+        "P02",
+        "P03",
+        "P04",
+        "P05",
+        "P06",
+        "P07",
+        "P08",
+        "P09",
+        "P10",
+        "P11",
+        "P12",
+        "P13",
+        "P14",
+        "P15",
+        "P16",
+        "P17",
+        "P18",
+        "P19",
+        "P20"
+      ],
+      "source_refs": [
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            79,
+            1515,
+            235,
+            1548
+          ],
+          "raw_text": "Легенда типов линий",
+          "method": "visual",
+          "fields": [
+            "line_class",
+            "active_state"
+          ]
+        }
+      ],
+      "resolution": null,
+      "reviewed_by": null,
+      "reviewed_at": null
+    },
+    {
+      "id": "A_VALVE_REVIEW",
+      "kind": "valve_state",
+      "description": "Состояния наблюдаются по заливке символов и правилу README: прозрачный открыт, закрашенный закрыт. Нужно подтвердить актуальность состояний. Второй компонент маркировки клапана сохранён строкой без назначения единицы давления.",
+      "status": "open",
+      "affected_ids": [
+        "UDR_V01",
+        "UDR_V02",
+        "UDR_V03",
+        "UDR_V05",
+        "UDR_V06",
+        "UDR_V07",
+        "UDR_V08",
+        "UDR_V09",
+        "UDR_V10",
+        "UDR_V11",
+        "UDR_V14"
+      ],
+      "source_refs": [
+        {
+          "source_id": "scheme_readme",
+          "line_start": 4,
+          "line_end": 4,
+          "raw_text": "Степень открытия клапанов (прозрачный клапан - полностью открыт, закрашенный - полностью закрыт)",
+          "method": "text_file",
+          "fields": [
+            "physical_state"
+          ]
+        },
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            45,
+            1250,
+            470,
+            1466
+          ],
+          "raw_text": "Схема УДР: символы и подписи арматуры",
+          "method": "visual",
+          "fields": [
+            "physical_state",
+            "pressure_rating_raw"
+          ]
+        }
+      ],
+      "resolution": null,
+      "reviewed_by": null,
+      "reviewed_at": null
+    }
+  ]
+}

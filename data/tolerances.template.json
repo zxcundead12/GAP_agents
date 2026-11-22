@@ -1,0 +1,6 @@
+{
+  "length_m": {"unit": "m", "absolute": null, "approved_by": null, "approved_at": null, "source": null},
+  "outer_diameter_mm": {"unit": "mm", "absolute": null, "approved_by": null, "approved_at": null, "source": null},
+  "wall_thickness_mm": {"unit": "mm", "absolute": null, "approved_by": null, "approved_at": null, "source": null},
+  "inner_diameter_mm": {"unit": "mm", "absolute": null, "approved_by": null, "approved_at": null, "source": null}
+}

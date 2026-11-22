@@ -1,0 +1,1649 @@
+{
+  "schema_version": "1.0",
+  "kind": "external_pipeline_annotation_catalog",
+  "case_id": "palyanovo_udr_candidate_2025",
+  "warning": "Независимый реестр читаемых подписей, не граф и не экспорт GAP. Ни одна запись не присвоена P01—P20. Концы сохранены по тексту; они не определяют автоматически топологию, направление потока или соответствие портам GAP. Все данные pending.",
+  "source": {
+    "id": "scheme_pdf",
+    "path": "../GAP/Тех.схема НСС, НН Пальяновского мр 2025.pdf",
+    "sha256": "2559831e5bec89c07948adec5bb54958a4068a3c87989333ff0305f0b2fe8025",
+    "page": 1,
+    "width_pt": 1296,
+    "height_pt": 1818
+  },
+  "ambiguities": [
+    "Две подписи К-331—УДР (330 м/2003 и 130 м/2022) сохранены отдельно: природа различия неизвестна.",
+    "Две подписи К-340—УЗ№13 (2004/2022) сохранены отдельно, несмотря на совпадение размеров и длины.",
+    "Названия Уз№22—Уз№25 в текстовых подписях не сопоставлены автоматически с другими индексами узлов на рисунке.",
+    "УДР УПСВ у ввода К-426 сохранено буквально, точная граница/порт не установлены.",
+    "Производный внутренний диаметр вычислен из наблюдаемых OD/толщины; это не отдельное измерение и не инженерное подтверждение."
+  ],
+  "records": [
+    {
+      "id": "EXT_OBS_01",
+      "from_label": "К-328",
+      "to_label": "УДР",
+      "raw_text": "К-328 - УДР, Ø114х8, L-1810м, 2010г.",
+      "parameters": {
+        "length_m": 1810,
+        "outer_diameter_mm": 114,
+        "wall_thickness_mm": 8,
+        "inner_diameter_mm": 98
+      },
+      "units": {
+        "length_m": "m",
+        "outer_diameter_mm": "mm",
+        "wall_thickness_mm": "mm",
+        "inner_diameter_mm": "mm"
+      },
+      "year_as_printed": 2010,
+      "duplicate_group": null,
+      "source_refs": [
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            360,
+            1138,
+            413,
+            1153
+          ],
+          "raw_text": "К-328 - УДР, Ø114х8, L-1810м, 2010г.",
+          "method": "text_layer",
+          "fields": [
+            "from_label",
+            "to_label",
+            "outer_diameter_mm",
+            "wall_thickness_mm",
+            "length_m",
+            "year_as_printed"
+          ]
+        },
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            360,
+            1138,
+            413,
+            1153
+          ],
+          "raw_text": "Подпись сверена по изображению PDF",
+          "method": "visual",
+          "fields": [
+            "from_label",
+            "to_label",
+            "outer_diameter_mm",
+            "wall_thickness_mm",
+            "length_m",
+            "year_as_printed"
+          ]
+        },
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            360,
+            1138,
+            413,
+            1153
+          ],
+          "raw_text": "ID = OD - 2 × wall = 114 - 2 × 8 = 98 мм",
+          "method": "derived",
+          "fields": [
+            "inner_diameter_mm"
+          ]
+        }
+      ],
+      "association_status": "unmapped_to_candidate",
+      "review_status": "pending",
+      "reviewed_by": null,
+      "reviewed_at": null,
+      "notes": ""
+    },
+    {
+      "id": "EXT_OBS_02",
+      "from_label": "К-328",
+      "to_label": "т.вр.Р543",
+      "raw_text": "К-328 – т.вр.Р543, Ø159х8, L-1510м, 2001г.",
+      "parameters": {
+        "length_m": 1510,
+        "outer_diameter_mm": 159,
+        "wall_thickness_mm": 8,
+        "inner_diameter_mm": 143
+      },
+      "units": {
+        "length_m": "m",
+        "outer_diameter_mm": "mm",
+        "wall_thickness_mm": "mm",
+        "inner_diameter_mm": "mm"
+      },
+      "year_as_printed": 2001,
+      "duplicate_group": null,
+      "source_refs": [
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            243,
+            1186,
+            332,
+            1201
+          ],
+          "raw_text": "К-328 – т.вр.Р543, Ø159х8, L-1510м, 2001г.",
+          "method": "text_layer",
+          "fields": [
+            "from_label",
+            "to_label",
+            "outer_diameter_mm",
+            "wall_thickness_mm",
+            "length_m",
+            "year_as_printed"
+          ]
+        },
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            243,
+            1186,
+            332,
+            1201
+          ],
+          "raw_text": "Подпись сверена по изображению PDF",
+          "method": "visual",
+          "fields": [
+            "from_label",
+            "to_label",
+            "outer_diameter_mm",
+            "wall_thickness_mm",
+            "length_m",
+            "year_as_printed"
+          ]
+        },
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            243,
+            1186,
+            332,
+            1201
+          ],
+          "raw_text": "ID = OD - 2 × wall = 159 - 2 × 8 = 143 мм",
+          "method": "derived",
+          "fields": [
+            "inner_diameter_mm"
+          ]
+        }
+      ],
+      "association_status": "unmapped_to_candidate",
+      "review_status": "pending",
+      "reviewed_by": null,
+      "reviewed_at": null,
+      "notes": "Отдельная подпись и другая трасса, чем К-328—УДР."
+    },
+    {
+      "id": "EXT_OBS_03",
+      "from_label": "К-331",
+      "to_label": "УДР",
+      "raw_text": "К-331 – УДР, Ø114х8, L-330м, 2003г., продут декабрь 2022",
+      "parameters": {
+        "length_m": 330,
+        "outer_diameter_mm": 114,
+        "wall_thickness_mm": 8,
+        "inner_diameter_mm": 98
+      },
+      "units": {
+        "length_m": "m",
+        "outer_diameter_mm": "mm",
+        "wall_thickness_mm": "mm",
+        "inner_diameter_mm": "mm"
+      },
+      "year_as_printed": 2003,
+      "duplicate_group": "K331_UDR",
+      "source_refs": [
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            603,
+            1063,
+            659,
+            1084
+          ],
+          "raw_text": "К-331 – УДР, Ø114х8, L-330м, 2003г., продут декабрь 2022",
+          "method": "text_layer",
+          "fields": [
+            "from_label",
+            "to_label",
+            "outer_diameter_mm",
+            "wall_thickness_mm",
+            "length_m",
+            "year_as_printed"
+          ]
+        },
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            603,
+            1063,
+            659,
+            1084
+          ],
+          "raw_text": "Подпись сверена по изображению PDF",
+          "method": "visual",
+          "fields": [
+            "from_label",
+            "to_label",
+            "outer_diameter_mm",
+            "wall_thickness_mm",
+            "length_m",
+            "year_as_printed"
+          ]
+        },
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            603,
+            1063,
+            659,
+            1084
+          ],
+          "raw_text": "ID = OD - 2 × wall = 114 - 2 × 8 = 98 мм",
+          "method": "derived",
+          "fields": [
+            "inner_diameter_mm"
+          ]
+        }
+      ],
+      "association_status": "unmapped_to_candidate",
+      "review_status": "pending",
+      "reviewed_by": null,
+      "reviewed_at": null,
+      "notes": "Не сливать с записью 130 м за 2022 год."
+    },
+    {
+      "id": "EXT_OBS_04",
+      "from_label": "К-331",
+      "to_label": "УДР",
+      "raw_text": "К-331 – УДР, Ø114х8, L-130м, 2022г. Запуск в работу декабрь 2022",
+      "parameters": {
+        "length_m": 130,
+        "outer_diameter_mm": 114,
+        "wall_thickness_mm": 8,
+        "inner_diameter_mm": 98
+      },
+      "units": {
+        "length_m": "m",
+        "outer_diameter_mm": "mm",
+        "wall_thickness_mm": "mm",
+        "inner_diameter_mm": "mm"
+      },
+      "year_as_printed": 2022,
+      "duplicate_group": "K331_UDR",
+      "source_refs": [
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            419,
+            973,
+            508,
+            988
+          ],
+          "raw_text": "К-331 – УДР, Ø114х8, L-130м, 2022г. Запуск в работу декабрь 2022",
+          "method": "text_layer",
+          "fields": [
+            "from_label",
+            "to_label",
+            "outer_diameter_mm",
+            "wall_thickness_mm",
+            "length_m",
+            "year_as_printed"
+          ]
+        },
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            419,
+            973,
+            508,
+            988
+          ],
+          "raw_text": "Подпись сверена по изображению PDF",
+          "method": "visual",
+          "fields": [
+            "from_label",
+            "to_label",
+            "outer_diameter_mm",
+            "wall_thickness_mm",
+            "length_m",
+            "year_as_printed"
+          ]
+        },
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            419,
+            973,
+            508,
+            988
+          ],
+          "raw_text": "ID = OD - 2 × wall = 114 - 2 × 8 = 98 мм",
+          "method": "derived",
+          "fields": [
+            "inner_diameter_mm"
+          ]
+        }
+      ],
+      "association_status": "unmapped_to_candidate",
+      "review_status": "pending",
+      "reviewed_by": null,
+      "reviewed_at": null,
+      "notes": "Не сливать с записью 330 м за 2003 год."
+    },
+    {
+      "id": "EXT_OBS_05",
+      "from_label": "К-426",
+      "to_label": "УДР УПСВ",
+      "raw_text": "К-426 – УДР УПСВ Ø159х8 L-3188м, 2017г.(запуск 06.09.18)",
+      "parameters": {
+        "length_m": 3188,
+        "outer_diameter_mm": 159,
+        "wall_thickness_mm": 8,
+        "inner_diameter_mm": 143
+      },
+      "units": {
+        "length_m": "m",
+        "outer_diameter_mm": "mm",
+        "wall_thickness_mm": "mm",
+        "inner_diameter_mm": "mm"
+      },
+      "year_as_printed": 2017,
+      "duplicate_group": null,
+      "source_refs": [
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            1056,
+            1400,
+            1136,
+            1422
+          ],
+          "raw_text": "К-426 – УДР УПСВ Ø159х8 L-3188м, 2017г.(запуск 06.09.18)",
+          "method": "text_layer",
+          "fields": [
+            "from_label",
+            "to_label",
+            "outer_diameter_mm",
+            "wall_thickness_mm",
+            "length_m",
+            "year_as_printed"
+          ]
+        },
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            1056,
+            1400,
+            1136,
+            1422
+          ],
+          "raw_text": "Подпись сверена по изображению PDF",
+          "method": "visual",
+          "fields": [
+            "from_label",
+            "to_label",
+            "outer_diameter_mm",
+            "wall_thickness_mm",
+            "length_m",
+            "year_as_printed"
+          ]
+        },
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            1056,
+            1400,
+            1136,
+            1422
+          ],
+          "raw_text": "ID = OD - 2 × wall = 159 - 2 × 8 = 143 мм",
+          "method": "derived",
+          "fields": [
+            "inner_diameter_mm"
+          ]
+        }
+      ],
+      "association_status": "unmapped_to_candidate",
+      "review_status": "pending",
+      "reviewed_by": null,
+      "reviewed_at": null,
+      "notes": "Второй конец сохранён буквально как УДР УПСВ; точный порт требует подтверждения."
+    },
+    {
+      "id": "EXT_OBS_06",
+      "from_label": "Скв. №1336",
+      "to_label": "УДР",
+      "raw_text": "Скв. №1336 – УДР, Ø159х5, L-270м, 2001г.",
+      "parameters": {
+        "length_m": 270,
+        "outer_diameter_mm": 159,
+        "wall_thickness_mm": 5,
+        "inner_diameter_mm": 149
+      },
+      "units": {
+        "length_m": "m",
+        "outer_diameter_mm": "mm",
+        "wall_thickness_mm": "mm",
+        "inner_diameter_mm": "mm"
+      },
+      "year_as_printed": 2001,
+      "duplicate_group": null,
+      "source_refs": [
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            603,
+            1112,
+            691,
+            1127
+          ],
+          "raw_text": "Скв. №1336 – УДР, Ø159х5, L-270м, 2001г.",
+          "method": "text_layer",
+          "fields": [
+            "from_label",
+            "to_label",
+            "outer_diameter_mm",
+            "wall_thickness_mm",
+            "length_m",
+            "year_as_printed"
+          ]
+        },
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            603,
+            1112,
+            691,
+            1127
+          ],
+          "raw_text": "Подпись сверена по изображению PDF",
+          "method": "visual",
+          "fields": [
+            "from_label",
+            "to_label",
+            "outer_diameter_mm",
+            "wall_thickness_mm",
+            "length_m",
+            "year_as_printed"
+          ]
+        },
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            603,
+            1112,
+            691,
+            1127
+          ],
+          "raw_text": "ID = OD - 2 × wall = 159 - 2 × 5 = 149 мм",
+          "method": "derived",
+          "fields": [
+            "inner_diameter_mm"
+          ]
+        }
+      ],
+      "association_status": "unmapped_to_candidate",
+      "review_status": "pending",
+      "reviewed_by": null,
+      "reviewed_at": null,
+      "notes": ""
+    },
+    {
+      "id": "EXT_OBS_07",
+      "from_label": "К-335",
+      "to_label": "УЗ№12",
+      "raw_text": "К-335 – УЗ№12, Ø114х8, L-700м, 2010г.",
+      "parameters": {
+        "length_m": 700,
+        "outer_diameter_mm": 114,
+        "wall_thickness_mm": 8,
+        "inner_diameter_mm": 98
+      },
+      "units": {
+        "length_m": "m",
+        "outer_diameter_mm": "mm",
+        "wall_thickness_mm": "mm",
+        "inner_diameter_mm": "mm"
+      },
+      "year_as_printed": 2010,
+      "duplicate_group": null,
+      "source_refs": [
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            980,
+            1373,
+            1077,
+            1384
+          ],
+          "raw_text": "К-335 – УЗ№12, Ø114х8, L-700м, 2010г.",
+          "method": "text_layer",
+          "fields": [
+            "from_label",
+            "to_label",
+            "outer_diameter_mm",
+            "wall_thickness_mm",
+            "length_m",
+            "year_as_printed"
+          ]
+        },
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            980,
+            1373,
+            1077,
+            1384
+          ],
+          "raw_text": "Подпись сверена по изображению PDF",
+          "method": "visual",
+          "fields": [
+            "from_label",
+            "to_label",
+            "outer_diameter_mm",
+            "wall_thickness_mm",
+            "length_m",
+            "year_as_printed"
+          ]
+        },
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            980,
+            1373,
+            1077,
+            1384
+          ],
+          "raw_text": "ID = OD - 2 × wall = 114 - 2 × 8 = 98 мм",
+          "method": "derived",
+          "fields": [
+            "inner_diameter_mm"
+          ]
+        }
+      ],
+      "association_status": "unmapped_to_candidate",
+      "review_status": "pending",
+      "reviewed_by": null,
+      "reviewed_at": null,
+      "notes": ""
+    },
+    {
+      "id": "EXT_OBS_08",
+      "from_label": "Скв. №9322",
+      "to_label": "УЗ№12",
+      "raw_text": "Скв. №9322 – УЗ№12, Ø159х8, L-750м, 2001г.",
+      "parameters": {
+        "length_m": 750,
+        "outer_diameter_mm": 159,
+        "wall_thickness_mm": 8,
+        "inner_diameter_mm": 143
+      },
+      "units": {
+        "length_m": "m",
+        "outer_diameter_mm": "mm",
+        "wall_thickness_mm": "mm",
+        "inner_diameter_mm": "mm"
+      },
+      "year_as_printed": 2001,
+      "duplicate_group": null,
+      "source_refs": [
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            967,
+            1268,
+            1044,
+            1284
+          ],
+          "raw_text": "Скв. №9322 – УЗ№12, Ø159х8, L-750м, 2001г.",
+          "method": "text_layer",
+          "fields": [
+            "from_label",
+            "to_label",
+            "outer_diameter_mm",
+            "wall_thickness_mm",
+            "length_m",
+            "year_as_printed"
+          ]
+        },
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            967,
+            1268,
+            1044,
+            1284
+          ],
+          "raw_text": "Подпись сверена по изображению PDF",
+          "method": "visual",
+          "fields": [
+            "from_label",
+            "to_label",
+            "outer_diameter_mm",
+            "wall_thickness_mm",
+            "length_m",
+            "year_as_printed"
+          ]
+        },
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            967,
+            1268,
+            1044,
+            1284
+          ],
+          "raw_text": "ID = OD - 2 × wall = 159 - 2 × 8 = 143 мм",
+          "method": "derived",
+          "fields": [
+            "inner_diameter_mm"
+          ]
+        }
+      ],
+      "association_status": "unmapped_to_candidate",
+      "review_status": "pending",
+      "reviewed_by": null,
+      "reviewed_at": null,
+      "notes": ""
+    },
+    {
+      "id": "EXT_OBS_09",
+      "from_label": "УЗ№14",
+      "to_label": "УЗ№12",
+      "raw_text": "УЗ№14 – УЗ№12, Ø159х8, L-1600м, 2005г.",
+      "parameters": {
+        "length_m": 1600,
+        "outer_diameter_mm": 159,
+        "wall_thickness_mm": 8,
+        "inner_diameter_mm": 143
+      },
+      "units": {
+        "length_m": "m",
+        "outer_diameter_mm": "mm",
+        "wall_thickness_mm": "mm",
+        "inner_diameter_mm": "mm"
+      },
+      "year_as_printed": 2005,
+      "duplicate_group": null,
+      "source_refs": [
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            897,
+            1439,
+            964,
+            1455
+          ],
+          "raw_text": "УЗ№14 – УЗ№12, Ø159х8, L-1600м, 2005г.",
+          "method": "text_layer",
+          "fields": [
+            "from_label",
+            "to_label",
+            "outer_diameter_mm",
+            "wall_thickness_mm",
+            "length_m",
+            "year_as_printed"
+          ]
+        },
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            897,
+            1439,
+            964,
+            1455
+          ],
+          "raw_text": "Подпись сверена по изображению PDF",
+          "method": "visual",
+          "fields": [
+            "from_label",
+            "to_label",
+            "outer_diameter_mm",
+            "wall_thickness_mm",
+            "length_m",
+            "year_as_printed"
+          ]
+        },
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            897,
+            1439,
+            964,
+            1455
+          ],
+          "raw_text": "ID = OD - 2 × wall = 159 - 2 × 8 = 143 мм",
+          "method": "derived",
+          "fields": [
+            "inner_diameter_mm"
+          ]
+        }
+      ],
+      "association_status": "unmapped_to_candidate",
+      "review_status": "pending",
+      "reviewed_by": null,
+      "reviewed_at": null,
+      "notes": ""
+    },
+    {
+      "id": "EXT_OBS_10",
+      "from_label": "К-340",
+      "to_label": "УЗ№13",
+      "raw_text": "К-340 – УЗ№13, Ø159х8, L-120м, 2004г.",
+      "parameters": {
+        "length_m": 120,
+        "outer_diameter_mm": 159,
+        "wall_thickness_mm": 8,
+        "inner_diameter_mm": 143
+      },
+      "units": {
+        "length_m": "m",
+        "outer_diameter_mm": "mm",
+        "wall_thickness_mm": "mm",
+        "inner_diameter_mm": "mm"
+      },
+      "year_as_printed": 2004,
+      "duplicate_group": "K340_UZ13",
+      "source_refs": [
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            910,
+            1618,
+            979,
+            1635
+          ],
+          "raw_text": "К-340 – УЗ№13, Ø159х8, L-120м, 2004г.",
+          "method": "text_layer",
+          "fields": [
+            "from_label",
+            "to_label",
+            "outer_diameter_mm",
+            "wall_thickness_mm",
+            "length_m",
+            "year_as_printed"
+          ]
+        },
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            910,
+            1618,
+            979,
+            1635
+          ],
+          "raw_text": "Подпись сверена по изображению PDF",
+          "method": "visual",
+          "fields": [
+            "from_label",
+            "to_label",
+            "outer_diameter_mm",
+            "wall_thickness_mm",
+            "length_m",
+            "year_as_printed"
+          ]
+        },
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            910,
+            1618,
+            979,
+            1635
+          ],
+          "raw_text": "ID = OD - 2 × wall = 159 - 2 × 8 = 143 мм",
+          "method": "derived",
+          "fields": [
+            "inner_diameter_mm"
+          ]
+        }
+      ],
+      "association_status": "unmapped_to_candidate",
+      "review_status": "pending",
+      "reviewed_by": null,
+      "reviewed_at": null,
+      "notes": "Не сливать с аналогичной подписью за 2022 год."
+    },
+    {
+      "id": "EXT_OBS_11",
+      "from_label": "К-340",
+      "to_label": "УЗ№13",
+      "raw_text": "К-340 – УЗ№13, Ø159х8, L-120м, 2022г.",
+      "parameters": {
+        "length_m": 120,
+        "outer_diameter_mm": 159,
+        "wall_thickness_mm": 8,
+        "inner_diameter_mm": 143
+      },
+      "units": {
+        "length_m": "m",
+        "outer_diameter_mm": "mm",
+        "wall_thickness_mm": "mm",
+        "inner_diameter_mm": "mm"
+      },
+      "year_as_printed": 2022,
+      "duplicate_group": "K340_UZ13",
+      "source_refs": [
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            712,
+            1630,
+            809,
+            1640
+          ],
+          "raw_text": "К-340 – УЗ№13, Ø159х8, L-120м, 2022г.",
+          "method": "text_layer",
+          "fields": [
+            "from_label",
+            "to_label",
+            "outer_diameter_mm",
+            "wall_thickness_mm",
+            "length_m",
+            "year_as_printed"
+          ]
+        },
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            712,
+            1630,
+            809,
+            1640
+          ],
+          "raw_text": "Подпись сверена по изображению PDF",
+          "method": "visual",
+          "fields": [
+            "from_label",
+            "to_label",
+            "outer_diameter_mm",
+            "wall_thickness_mm",
+            "length_m",
+            "year_as_printed"
+          ]
+        },
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            712,
+            1630,
+            809,
+            1640
+          ],
+          "raw_text": "ID = OD - 2 × wall = 159 - 2 × 8 = 143 мм",
+          "method": "derived",
+          "fields": [
+            "inner_diameter_mm"
+          ]
+        }
+      ],
+      "association_status": "unmapped_to_candidate",
+      "review_status": "pending",
+      "reviewed_by": null,
+      "reviewed_at": null,
+      "notes": "Не сливать с аналогичной подписью за 2004 год."
+    },
+    {
+      "id": "EXT_OBS_12",
+      "from_label": "К-430",
+      "to_label": "Уз№20",
+      "raw_text": "К-430 – Уз№20, 159х8, L-4640м. Запуск 07.02.2022",
+      "parameters": {
+        "length_m": 4640,
+        "outer_diameter_mm": 159,
+        "wall_thickness_mm": 8,
+        "inner_diameter_mm": 143
+      },
+      "units": {
+        "length_m": "m",
+        "outer_diameter_mm": "mm",
+        "wall_thickness_mm": "mm",
+        "inner_diameter_mm": "mm"
+      },
+      "year_as_printed": null,
+      "duplicate_group": null,
+      "source_refs": [
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            1046,
+            378,
+            1124,
+            394
+          ],
+          "raw_text": "К-430 – Уз№20, 159х8, L-4640м. Запуск 07.02.2022",
+          "method": "text_layer",
+          "fields": [
+            "from_label",
+            "to_label",
+            "outer_diameter_mm",
+            "wall_thickness_mm",
+            "length_m"
+          ]
+        },
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            1046,
+            378,
+            1124,
+            394
+          ],
+          "raw_text": "Подпись сверена по изображению PDF",
+          "method": "visual",
+          "fields": [
+            "from_label",
+            "to_label",
+            "outer_diameter_mm",
+            "wall_thickness_mm",
+            "length_m"
+          ]
+        },
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            1046,
+            378,
+            1124,
+            394
+          ],
+          "raw_text": "ID = OD - 2 × wall = 159 - 2 × 8 = 143 мм",
+          "method": "derived",
+          "fields": [
+            "inner_diameter_mm"
+          ]
+        }
+      ],
+      "association_status": "unmapped_to_candidate",
+      "review_status": "pending",
+      "reviewed_by": null,
+      "reviewed_at": null,
+      "notes": "2022 указан в дате запуска, не выдан за год строительства."
+    },
+    {
+      "id": "EXT_OBS_13",
+      "from_label": "Уз№20",
+      "to_label": "Уз№8.1",
+      "raw_text": "Уз№20-Уз№8.1, Ø159х8, L-193м. Запуск 07.02.2022 г.",
+      "parameters": {
+        "length_m": 193,
+        "outer_diameter_mm": 159,
+        "wall_thickness_mm": 8,
+        "inner_diameter_mm": 143
+      },
+      "units": {
+        "length_m": "m",
+        "outer_diameter_mm": "mm",
+        "wall_thickness_mm": "mm",
+        "inner_diameter_mm": "mm"
+      },
+      "year_as_printed": null,
+      "duplicate_group": null,
+      "source_refs": [
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            666,
+            453,
+            718,
+            475
+          ],
+          "raw_text": "Уз№20-Уз№8.1, Ø159х8, L-193м. Запуск 07.02.2022 г.",
+          "method": "text_layer",
+          "fields": [
+            "from_label",
+            "to_label",
+            "outer_diameter_mm",
+            "wall_thickness_mm",
+            "length_m"
+          ]
+        },
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            666,
+            453,
+            718,
+            475
+          ],
+          "raw_text": "Подпись сверена по изображению PDF",
+          "method": "visual",
+          "fields": [
+            "from_label",
+            "to_label",
+            "outer_diameter_mm",
+            "wall_thickness_mm",
+            "length_m"
+          ]
+        },
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            666,
+            453,
+            718,
+            475
+          ],
+          "raw_text": "ID = OD - 2 × wall = 159 - 2 × 8 = 143 мм",
+          "method": "derived",
+          "fields": [
+            "inner_diameter_mm"
+          ]
+        }
+      ],
+      "association_status": "unmapped_to_candidate",
+      "review_status": "pending",
+      "reviewed_by": null,
+      "reviewed_at": null,
+      "notes": "Названия концов взяты из подписи; совмещение с узлами рисунка требует проверки."
+    },
+    {
+      "id": "EXT_OBS_14",
+      "from_label": "Уз№8.1",
+      "to_label": "Уз№22",
+      "raw_text": "Уз№8.1-Уз№22, Ø159х8, L-2052м",
+      "parameters": {
+        "length_m": 2052,
+        "outer_diameter_mm": 159,
+        "wall_thickness_mm": 8,
+        "inner_diameter_mm": 143
+      },
+      "units": {
+        "length_m": "m",
+        "outer_diameter_mm": "mm",
+        "wall_thickness_mm": "mm",
+        "inner_diameter_mm": "mm"
+      },
+      "year_as_printed": null,
+      "duplicate_group": null,
+      "source_refs": [
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            598,
+            542,
+            643,
+            559
+          ],
+          "raw_text": "Уз№8.1-Уз№22, Ø159х8, L-2052м",
+          "method": "text_layer",
+          "fields": [
+            "from_label",
+            "to_label",
+            "outer_diameter_mm",
+            "wall_thickness_mm",
+            "length_m"
+          ]
+        },
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            598,
+            542,
+            643,
+            559
+          ],
+          "raw_text": "Подпись сверена по изображению PDF",
+          "method": "visual",
+          "fields": [
+            "from_label",
+            "to_label",
+            "outer_diameter_mm",
+            "wall_thickness_mm",
+            "length_m"
+          ]
+        },
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            598,
+            542,
+            643,
+            559
+          ],
+          "raw_text": "ID = OD - 2 × wall = 159 - 2 × 8 = 143 мм",
+          "method": "derived",
+          "fields": [
+            "inner_diameter_mm"
+          ]
+        }
+      ],
+      "association_status": "unmapped_to_candidate",
+      "review_status": "pending",
+      "reviewed_by": null,
+      "reviewed_at": null,
+      "notes": "Индекс Уз№22 не переименован автоматически в другой видимый УЗ."
+    },
+    {
+      "id": "EXT_OBS_15",
+      "from_label": "Уз№22",
+      "to_label": "Уз№23",
+      "raw_text": "Уз№22-Уз№23, Ø159х8, L-452м",
+      "parameters": {
+        "length_m": 452,
+        "outer_diameter_mm": 159,
+        "wall_thickness_mm": 8,
+        "inner_diameter_mm": 143
+      },
+      "units": {
+        "length_m": "m",
+        "outer_diameter_mm": "mm",
+        "wall_thickness_mm": "mm",
+        "inner_diameter_mm": "mm"
+      },
+      "year_as_printed": null,
+      "duplicate_group": null,
+      "source_refs": [
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            748,
+            608,
+            790,
+            625
+          ],
+          "raw_text": "Уз№22-Уз№23, Ø159х8, L-452м",
+          "method": "text_layer",
+          "fields": [
+            "from_label",
+            "to_label",
+            "outer_diameter_mm",
+            "wall_thickness_mm",
+            "length_m"
+          ]
+        },
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            748,
+            608,
+            790,
+            625
+          ],
+          "raw_text": "Подпись сверена по изображению PDF",
+          "method": "visual",
+          "fields": [
+            "from_label",
+            "to_label",
+            "outer_diameter_mm",
+            "wall_thickness_mm",
+            "length_m"
+          ]
+        },
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            748,
+            608,
+            790,
+            625
+          ],
+          "raw_text": "ID = OD - 2 × wall = 159 - 2 × 8 = 143 мм",
+          "method": "derived",
+          "fields": [
+            "inner_diameter_mm"
+          ]
+        }
+      ],
+      "association_status": "unmapped_to_candidate",
+      "review_status": "pending",
+      "reviewed_by": null,
+      "reviewed_at": null,
+      "notes": "Индексы концов не сопоставлены автоматически с иными обозначениями узлов."
+    },
+    {
+      "id": "EXT_OBS_16",
+      "from_label": "Уз№23",
+      "to_label": "Уз№24",
+      "raw_text": "Уз№23-Уз№24, Ø219х8, L-726м",
+      "parameters": {
+        "length_m": 726,
+        "outer_diameter_mm": 219,
+        "wall_thickness_mm": 8,
+        "inner_diameter_mm": 203
+      },
+      "units": {
+        "length_m": "m",
+        "outer_diameter_mm": "mm",
+        "wall_thickness_mm": "mm",
+        "inner_diameter_mm": "mm"
+      },
+      "year_as_printed": null,
+      "duplicate_group": null,
+      "source_refs": [
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            654,
+            735,
+            695,
+            752
+          ],
+          "raw_text": "Уз№23-Уз№24, Ø219х8, L-726м",
+          "method": "text_layer",
+          "fields": [
+            "from_label",
+            "to_label",
+            "outer_diameter_mm",
+            "wall_thickness_mm",
+            "length_m"
+          ]
+        },
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            654,
+            735,
+            695,
+            752
+          ],
+          "raw_text": "Подпись сверена по изображению PDF",
+          "method": "visual",
+          "fields": [
+            "from_label",
+            "to_label",
+            "outer_diameter_mm",
+            "wall_thickness_mm",
+            "length_m"
+          ]
+        },
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            654,
+            735,
+            695,
+            752
+          ],
+          "raw_text": "ID = OD - 2 × wall = 219 - 2 × 8 = 203 мм",
+          "method": "derived",
+          "fields": [
+            "inner_diameter_mm"
+          ]
+        }
+      ],
+      "association_status": "unmapped_to_candidate",
+      "review_status": "pending",
+      "reviewed_by": null,
+      "reviewed_at": null,
+      "notes": "Индексы концов не сопоставлены автоматически с иными обозначениями узлов."
+    },
+    {
+      "id": "EXT_OBS_17",
+      "from_label": "Уз№24",
+      "to_label": "Уз№25",
+      "raw_text": "Уз№24-Уз№25, Ø219х8, L-212м",
+      "parameters": {
+        "length_m": 212,
+        "outer_diameter_mm": 219,
+        "wall_thickness_mm": 8,
+        "inner_diameter_mm": 203
+      },
+      "units": {
+        "length_m": "m",
+        "outer_diameter_mm": "mm",
+        "wall_thickness_mm": "mm",
+        "inner_diameter_mm": "mm"
+      },
+      "year_as_printed": null,
+      "duplicate_group": null,
+      "source_refs": [
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            640,
+            816,
+            682,
+            833
+          ],
+          "raw_text": "Уз№24-Уз№25, Ø219х8, L-212м",
+          "method": "text_layer",
+          "fields": [
+            "from_label",
+            "to_label",
+            "outer_diameter_mm",
+            "wall_thickness_mm",
+            "length_m"
+          ]
+        },
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            640,
+            816,
+            682,
+            833
+          ],
+          "raw_text": "Подпись сверена по изображению PDF",
+          "method": "visual",
+          "fields": [
+            "from_label",
+            "to_label",
+            "outer_diameter_mm",
+            "wall_thickness_mm",
+            "length_m"
+          ]
+        },
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            640,
+            816,
+            682,
+            833
+          ],
+          "raw_text": "ID = OD - 2 × wall = 219 - 2 × 8 = 203 мм",
+          "method": "derived",
+          "fields": [
+            "inner_diameter_mm"
+          ]
+        }
+      ],
+      "association_status": "unmapped_to_candidate",
+      "review_status": "pending",
+      "reviewed_by": null,
+      "reviewed_at": null,
+      "notes": "Индексы концов не сопоставлены автоматически с иными обозначениями узлов."
+    },
+    {
+      "id": "EXT_OBS_18",
+      "from_label": "Уз№25",
+      "to_label": "Уз№3.2",
+      "raw_text": "Уз№25-Уз№3.2, Ø219х8, L-1666м",
+      "parameters": {
+        "length_m": 1666,
+        "outer_diameter_mm": 219,
+        "wall_thickness_mm": 8,
+        "inner_diameter_mm": 203
+      },
+      "units": {
+        "length_m": "m",
+        "outer_diameter_mm": "mm",
+        "wall_thickness_mm": "mm",
+        "inner_diameter_mm": "mm"
+      },
+      "year_as_printed": null,
+      "duplicate_group": null,
+      "source_refs": [
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            625,
+            853,
+            669,
+            870
+          ],
+          "raw_text": "Уз№25-Уз№3.2, Ø219х8, L-1666м",
+          "method": "text_layer",
+          "fields": [
+            "from_label",
+            "to_label",
+            "outer_diameter_mm",
+            "wall_thickness_mm",
+            "length_m"
+          ]
+        },
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            625,
+            853,
+            669,
+            870
+          ],
+          "raw_text": "Подпись сверена по изображению PDF",
+          "method": "visual",
+          "fields": [
+            "from_label",
+            "to_label",
+            "outer_diameter_mm",
+            "wall_thickness_mm",
+            "length_m"
+          ]
+        },
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            625,
+            853,
+            669,
+            870
+          ],
+          "raw_text": "ID = OD - 2 × wall = 219 - 2 × 8 = 203 мм",
+          "method": "derived",
+          "fields": [
+            "inner_diameter_mm"
+          ]
+        }
+      ],
+      "association_status": "unmapped_to_candidate",
+      "review_status": "pending",
+      "reviewed_by": null,
+      "reviewed_at": null,
+      "notes": "Индексы концов не сопоставлены автоматически с иными обозначениями узлов."
+    },
+    {
+      "id": "EXT_OBS_19",
+      "from_label": "Скв. №12364",
+      "to_label": "УЗ№13",
+      "raw_text": "Скв. №12364 – УЗ№13, Ø159х8, L-120м, 2001г.",
+      "parameters": {
+        "length_m": 120,
+        "outer_diameter_mm": 159,
+        "wall_thickness_mm": 8,
+        "inner_diameter_mm": 143
+      },
+      "units": {
+        "length_m": "m",
+        "outer_diameter_mm": "mm",
+        "wall_thickness_mm": "mm",
+        "inner_diameter_mm": "mm"
+      },
+      "year_as_printed": 2001,
+      "duplicate_group": null,
+      "source_refs": [
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            952,
+            1527,
+            1038,
+            1544
+          ],
+          "raw_text": "Скв. №12364 – УЗ№13, Ø159х8, L-120м, 2001г.",
+          "method": "text_layer",
+          "fields": [
+            "from_label",
+            "to_label",
+            "outer_diameter_mm",
+            "wall_thickness_mm",
+            "length_m",
+            "year_as_printed"
+          ]
+        },
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            952,
+            1527,
+            1038,
+            1544
+          ],
+          "raw_text": "Подпись сверена по изображению PDF",
+          "method": "visual",
+          "fields": [
+            "from_label",
+            "to_label",
+            "outer_diameter_mm",
+            "wall_thickness_mm",
+            "length_m",
+            "year_as_printed"
+          ]
+        },
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            952,
+            1527,
+            1038,
+            1544
+          ],
+          "raw_text": "ID = OD - 2 × wall = 159 - 2 × 8 = 143 мм",
+          "method": "derived",
+          "fields": [
+            "inner_diameter_mm"
+          ]
+        }
+      ],
+      "association_status": "unmapped_to_candidate",
+      "review_status": "pending",
+      "reviewed_by": null,
+      "reviewed_at": null,
+      "notes": ""
+    },
+    {
+      "id": "EXT_OBS_20",
+      "from_label": "Скв. №583",
+      "to_label": "К-340",
+      "raw_text": "Скв. №583 – К-340, 89х8, L-250м, 2002г.",
+      "parameters": {
+        "length_m": 250,
+        "outer_diameter_mm": 89,
+        "wall_thickness_mm": 8,
+        "inner_diameter_mm": 73
+      },
+      "units": {
+        "length_m": "m",
+        "outer_diameter_mm": "mm",
+        "wall_thickness_mm": "mm",
+        "inner_diameter_mm": "mm"
+      },
+      "year_as_printed": 2002,
+      "duplicate_group": null,
+      "source_refs": [
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            888,
+            1642,
+            972,
+            1658
+          ],
+          "raw_text": "Скв. №583 – К-340, 89х8, L-250м, 2002г.",
+          "method": "text_layer",
+          "fields": [
+            "from_label",
+            "to_label",
+            "outer_diameter_mm",
+            "wall_thickness_mm",
+            "length_m",
+            "year_as_printed"
+          ]
+        },
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            888,
+            1642,
+            972,
+            1658
+          ],
+          "raw_text": "Подпись сверена по изображению PDF",
+          "method": "visual",
+          "fields": [
+            "from_label",
+            "to_label",
+            "outer_diameter_mm",
+            "wall_thickness_mm",
+            "length_m",
+            "year_as_printed"
+          ]
+        },
+        {
+          "source_id": "scheme_pdf",
+          "page": 1,
+          "bbox": [
+            888,
+            1642,
+            972,
+            1658
+          ],
+          "raw_text": "ID = OD - 2 × wall = 89 - 2 × 8 = 73 мм",
+          "method": "derived",
+          "fields": [
+            "inner_diameter_mm"
+          ]
+        }
+      ],
+      "association_status": "unmapped_to_candidate",
+      "review_status": "pending",
+      "reviewed_by": null,
+      "reviewed_at": null,
+      "notes": ""
+    }
+  ]
+}
