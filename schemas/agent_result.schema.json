@@ -1,0 +1,157 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "agent_result",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "run_id": {
+      "type": "string",
+      "pattern": "^run_[0-9a-f]{32}$"
+    },
+    "trace_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "execution_status": {
+      "enum": [
+        "API_ERROR",
+        "COM_UNAVAILABLE",
+        "CONFIRMATION_REQUIRED",
+        "ERROR",
+        "LICENSE_BUSY",
+        "LICENSE_UNAVAILABLE",
+        "LLM_INVALID_OUTPUT",
+        "LLM_NOT_CONFIGURED",
+        "LLM_UNAVAILABLE",
+        "MCP_UNAVAILABLE",
+        "NEEDS_CLARIFICATION",
+        "NOT_READY",
+        "OUT_OF_SCOPE",
+        "SESSION_BUSY",
+        "SUCCESS",
+        "TIMEOUT",
+        "UNSUPPORTED_MAPPING"
+      ]
+    },
+    "assessment_status": {
+      "enum": [
+        "OK",
+        "OUT_OF_TOLERANCE",
+        "NOT_ASSESSED"
+      ]
+    },
+    "message": {
+      "type": "string",
+      "minLength": 1
+    },
+    "task": {
+      "anyOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "operation": {
+              "type": "string",
+              "enum": [
+                "inspect",
+                "validate",
+                "report",
+                "compare",
+                "build",
+                "smoke",
+                "export",
+                "unsupported"
+              ]
+            },
+            "case_id": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "manifest_path": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "mapping_path": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "export_path": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "model_path": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "tolerances_path": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "clarifications": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "required": [
+            "operation",
+            "case_id",
+            "manifest_path",
+            "mapping_path",
+            "export_path",
+            "model_path",
+            "tolerances_path",
+            "clarifications"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "plan": {
+      "type": [
+        "object",
+        "null"
+      ]
+    },
+    "artifacts": {
+      "type": "object"
+    },
+    "issues": {
+      "type": "array"
+    },
+    "llm": {
+      "type": "object"
+    }
+  },
+  "required": [
+    "schema_version",
+    "run_id",
+    "trace_id",
+    "execution_status",
+    "assessment_status",
+    "message",
+    "task",
+    "plan",
+    "artifacts",
+    "issues",
+    "llm"
+  ]
+}
