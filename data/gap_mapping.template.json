@@ -1,0 +1,18 @@
+{
+  "schema_version": "1.0",
+  "profile_id": "ipm75-reviewed-pipe-mask-v1",
+  "review_status": "pending",
+  "reviewed_by": null,
+  "reviewed_at": null,
+  "node_types": {"junction": "JOINT", "source": "SOURCE", "boundary": "SINK"},
+  "valve_representation": "reviewed_pipe_mask_with_metadata",
+  "metadata_fields_acknowledged": false,
+  "section_index": null,
+  "array_field_index": null,
+  "units": {"length_m": "m", "outer_diameter_mm": "mm", "wall_thickness_mm": "mm", "inner_diameter_mm": "mm"},
+  "pipe_model_mode": "enthalpy_balance_preconfigured_template",
+  "implicit_pipe_pairs": [["JOINT", "JOINT"], ["JOINT", "SEP"]],
+  "template_path": null,
+  "template_sha256": null,
+  "verification_path": null
+}

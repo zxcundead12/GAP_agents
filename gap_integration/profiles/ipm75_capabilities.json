@@ -1,0 +1,34 @@
+{
+  "schema_version": "1.0",
+  "profile_id": "ipm75-build600-documentation-only",
+  "software": {"product": "GAP", "version": "8.5", "suite_version": "7.5", "ipm_build": "600", "com_progid": "PX32.OpenServer.1"},
+  "verification_basis": "installed_official_documentation_only",
+  "backend_production_status": "UNSUPPORTED_MAPPING",
+  "runtime_verification": "NOT_ASSESSED",
+  "official_references": {
+    "api": {"path": "C:/Program Files (x86)/Petroleum Experts/IPM 7.5/pdf/OpenServer/OpenServer_Complete.pdf", "publisher": "Petroleum Experts", "year": 2010},
+    "creation": {"document": "api", "section": "4.2.7–4.2.10", "pdf_pages": [112, 113, 114]},
+    "equipment": {"document": "api", "section": "4.1.7.2–4.1.8.1", "pdf_pages": [62, 63, 64, 65]},
+    "pipe": {"document": "api", "section": "4.1.8.4", "pdf_pages": [68, 69, 70]},
+    "index_example": {"document": "api", "section": "4.1.5", "pdf_pages": [48]},
+    "units": {"document": "api", "section": "3.6", "pdf_pages": [38, 39]},
+    "functions": {"document": "api", "section": "3.2.1", "pdf_pages": [23, 24, 25, 26]},
+    "undefined": {"document": "api", "section": "4.1.6", "pdf_pages": [49, 50]},
+    "mask": {"document": "api", "section": "4.2.45–4.2.52", "pdf_pages": [130, 131, 132]}
+  },
+  "capabilities": [
+    {"id": "create_equipment", "status": "documented_unverified", "tags": ["GAP.NEWITEM", "GAP.MOD[0].EQUIP.COUNT", "GAP.MOD[0].EQUIP[i].TYPE"], "reference_ids": ["creation", "equipment"], "note_ru": "JOINT, SOURCE, SINK, VALVE перечислены в официальном API; инженерное отображение и работа установленной версии ещё не подтверждены."},
+    {"id": "joint_pipe_connections", "status": "documented_unverified", "tags": ["GAP.LINKITEMS", "GAP.MOD[0].PIPE[{id}].ENDA.Label", "GAP.MOD[0].PIPE[{id}].ENDB.Label"], "reference_ids": ["creation", "pipe"], "note_ru": "Автоматический PIPE документирован для JOINT–JOINT и JOINT–SEP; отдельный NEWITEM PIPE может создать дубликат."},
+    {"id": "source_boundary_mapping", "status": "unverified", "tags": [], "reference_ids": ["creation", "equipment"], "note_ru": "Нужно согласовать SOURCE/иной источник и SINK/SEP для границ; названия типов не доказывают требуемую инженерную семантику."},
+    {"id": "native_source_sink_valve_connections", "status": "unverified", "tags": ["GAP.LINKITEMS"], "reference_ids": ["creation", "pipe"], "note_ru": "Общая команда связывания известна; конкретные сочетания SOURCE/SINK/VALVE, вспомогательные JOINT и pseudo-pipe требуют проверки."},
+    {"id": "pipe_geometry", "status": "documented_unverified", "tags": ["GAP.MOD[0].PIPE[{id}].Desc[j].Length", "GAP.MOD[0].PIPE[{id}].Desc[j].ID", "GAP.MOD[0].PIPE[{id}].Desc[j].OD", "GAP.MOD[0].PIPE[{id}].Desc[j].Thickness"], "reference_ids": ["pipe"], "note_ru": "Геометрия секций описана, OD и Thickness указаны только для Enthalpy Balance; шаблоны тегов не являются проверенными runtime-командами."},
+    {"id": "pipe_segment_indexing", "status": "unverified", "tags": [], "reference_ids": ["pipe", "index_example"], "note_ru": "Пример называет Desc[1].Length первой секцией; таблица использует Desc[j].LENGTH[j]. Нужны фактические индекс, размер массива и способ создания секции."},
+    {"id": "pipe_units", "status": "documented_unverified", "tags": ["GAP.UNITNAME", "GAP.MOD[0].PIPE[{id}].Desc[j].Length.UNITNAME"], "reference_ids": ["units"], "note_ru": "Get/Set используют текущие единицы модели. Названия единиц каждой переменной нужно считать и сопоставить с утверждённым профилем; подразумеваемой SI нет."},
+    {"id": "valve_state", "status": "unverified", "tags": [], "reference_ids": ["equipment", "mask"], "note_ru": "Native open/closed API не установлен. MASK/UNMASK и ISMASKED документированы, но их нельзя автоматически объявить физическим состоянием клапана."},
+    {"id": "valve_dn_and_rating", "status": "unverified", "tags": [], "reference_ids": ["equipment", "creation"], "note_ru": "Теги DN и рейтинга клапана не установлены. pressure_rating_raw нельзя превращать в давление без единицы и инженерного подтверждения."},
+    {"id": "identity_and_labels", "status": "documented_unverified", "tags": ["GAP.MOD[0].EQUIP[i].LABEL", "GAP.MOD[0].EQUIP[i].NAME", "GAP.MOD[0].EQUIP[i].COMMENT", "GAP.MOD[0].EQUIP[i].UniqueID"], "reference_ids": ["equipment"], "note_ru": "Нужны устойчивые ID, независимое чтение исходной подписи, проверка коллизий и усечения строк. COMMENT хранит метаданные, но не заменяет native инженерный параметр."},
+    {"id": "pipe_active_state", "status": "unverified", "tags": ["GAP.MOD[0].EQUIP[i].ISMASKED", "GAP.MOD[0].EQUIP[i].MASKFLAG"], "reference_ids": ["equipment", "mask"], "note_ru": "Пользовательское masking и итоговый MASKFLAG различаются. Отображение active_state и открытого пути требует согласования."},
+    {"id": "independent_normalized_export", "status": "unsupported", "tags": [], "reference_ids": ["equipment", "pipe", "units", "undefined"], "note_ru": "Текущий worker выдаёт raw snapshot. Полный независимый normalized_export параметров и клапанов не реализован; входной манифест не является экспортом."},
+    {"id": "production_build", "status": "unsupported", "tags": [], "reference_ids": ["creation", "functions"], "note_ru": "Текущий backend отклоняет production build с UNSUPPORTED_MAPPING до активации COM."}
+  ]
+}

@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "gap-openserver-integration"
+version = "0.2.0"
+description = "Participant 2: restricted GAP OpenServer adapter and MCP server"
+requires-python = ">=3.11"
+dependencies = ["mcp==2.3.0", "pywin32==312; sys_platform == 'win32'"]
+
+[project.scripts]
+gap-integration = "gap_integration.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["gap_integration*"]
+
+[tool.setuptools.package-data]
+gap_integration = ["profiles/*.json"]
